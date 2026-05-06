@@ -17,3 +17,4 @@
 - git commit -m "message"
 - git status 
 - git log
+- m
