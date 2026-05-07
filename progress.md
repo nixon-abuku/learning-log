@@ -27,3 +27,28 @@
   - Log shifts, calculate hours and pay
   - Node + Express + PostgreSQL
   - Personal use case: I work night shifts
+
+## May 7 2026 — Day 2
+
+### What I learned
+- Variables: const vs let — const cannot be reassigned, let can
+- Data types: string, number, boolean, null, undefined
+- typeof operator — tells you the data type of a variable
+- Functions — containers that store instructions
+- Parameters — variables that only exist inside a function
+- return vs console.log — return sends value back, console.log just displays
+- Template literals — backtick syntax with ${variable}
+- Reading error messages — file name, line number, error type
+
+### What I built
+- day1.js with variables, functions, multiply challenge, template literals
+
+### Commands used
+- node filename.js — runs a JavaScript file
+
+### Mistakes made
+- Typo: reuslt instead of result — caused ReferenceError
+- git add without . — nothing staged
+
+### Next session
+- Day 3 Friday — arrays, objects, loops
