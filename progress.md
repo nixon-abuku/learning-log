@@ -52,3 +52,31 @@
 
 ### Next session
 - Day 3 Friday — arrays, objects, loops
+
+## May 8 2026 — Day 3
+
+### What I learned
+- Arrays — storing multiple values in one container
+- Zero-based indexing — first item is position 0
+- array.push() — adds item to end
+- array.pop() — removes last item
+- array.length — counts items
+- for...of loop — iterates through every item
+- Objects — storing data with labels (keys and values)
+- Dot notation — object.key to access values
+- Array of objects — the pattern used in real databases
+
+### What I built
+- day3.js with arrays, loops, objects, and array of objects
+
+### Key insight
+- Array of objects is exactly what a database returns
+- Every job application in the Job Tracker will be an object inside an array
+
+### Mistakes made
+- Used regular quotes instead of backticks in template literal
+- Declared unused variable (countapp)
+
+### Next session
+- Day 4 Saturday — rest day
+- Day 5 Sunday — conditionals + array methods (.map, .filter)
