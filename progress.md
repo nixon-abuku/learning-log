@@ -80,3 +80,27 @@
 ### Next session
 - Day 4 Saturday — rest day
 - Day 5 Sunday — conditionals + array methods (.map, .filter)
+
+## May 9 2026 — Day 4 (Saturday)
+
+### What I learned
+- How to break down a problem in plain English before coding
+- Why you pass the whole array into a function, not a single item
+- Variable scope — variables inside a function don't exist outside it
+- count = count + shift.hours pattern for running totals
+- Calling a function and storing its return value in a variable
+
+### What I built
+- night-shift.js — loops through array of shift objects, calculates total hours worked, prints summary
+
+### Mistakes made
+- Semicolon inside array literal caused syntax error
+- Used count++ instead of adding actual hours
+- Tried to use count outside the function — ReferenceError
+
+### Key insight
+- Can't return before the loop runs — order of operations matters
+- The "why" behind every decision matters more than the syntax
+
+### Next session
+- Day 5 Sunday — conditionals + array methods (.map, .filter)
