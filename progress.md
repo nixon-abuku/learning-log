@@ -104,3 +104,23 @@
 
 ### Next session
 - Day 5 Sunday — conditionals + array methods (.map, .filter)
+
+## May 10 2026 — Day 5
+
+### What I learned
+- How to use if statements 
+- How to use .filter() to filter out what you don't need 
+- How to use .map() to display without anything being left out 
+
+### What I built
+- Built long-night-shift-log.js 
+- Filters out the days that the shift was below 10 hrs using .map() and function
+- Displays the days of the longshift using .map() and function
+- uses function and for loop to calculate the total hours worked on the days that had long shifts 
+
+### Mistakes made
+- Typo in .filter() , used shift.hr instead of shift.hrs 
+- Paranthesis placement on .filter(function(shift)){ , instead of .filter(function(shift){})
+
+### Next session
+- Day 6 Monday - forEach() + .find() + .reduce() + mini project
