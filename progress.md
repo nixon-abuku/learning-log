@@ -124,3 +124,21 @@
 
 ### Next session
 - Day 6 Monday - forEach() + .find() + .reduce() + mini project
+
+## May 11 2026 - Day 6
+
+### What i Learned 
+- Using array methods to calculate total using .reduce()
+- Using array method .forEach() to loop through every item in an array
+- Using array method .find() to find something matching condintion in an array
+
+### What I built 
+- Built monthly-paycheck-calculator.js 
+- Uses array methods .filter() to find weeks with low and high paychecks
+- Uses array methods to find total of weeks with low paycheck and total of weeks with high paycheck
+
+### Mistakes made 
+- Used dot notation directly on an array to get a property 
+
+### Next Session 
+- Ssync/await + fetch + hitting a public API.
