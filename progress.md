@@ -142,3 +142,26 @@
 
 ### Next Session 
 - Ssync/await + fetch + hitting a public API.
+
+## May 12 2026 - Day 7
+
+### What i learned 
+-  Using fetch() to grab data from a public API
+- Using async / await to tell the code to wait for the data to arrive before moving on
+- Using .json() to transform raw internet text into a usable JavaScript object.
+- Using Object.values() to extract data from an object when you don't know the exact
+- The power of refactoring: Taking three repetitive functions and condensing them into one clean, reusable function using a parameter (countryName).
+
+### What I built 
+- Built country-comparison.js (and a refactored v1).
+- Used a public API (restcountries.com) to fetch real-world data.
+- Printed out a clean comparison summary of the population, capital city, region, and languages for the USA, United Kingdom, and Germany.
+
+### Mistakes made 
+- Accessed nested data in the wrong order (tried captial.data[0] instead of data[0].capital).
+- Used single quotes (') instead of backticks (`) for template literals, which stopped the variable from working.
+- Hardcoded specific values (like USA or .eng) inside a reusable function, which caused an undefined error when testing other countries like Germany
+
+### Next Session 
+- Day 8 — Fetch mini project.
+
