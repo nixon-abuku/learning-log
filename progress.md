@@ -165,3 +165,32 @@
 ### Next Session 
 - Day 8 — Fetch mini project.
 
+## May 13 2026 — Day 8
+
+### What I learned
+- How to build a small fetch mini project using async / await
+- How to use fetch() to get real data from an API
+- How to use .json() to turn the API response into usable JavaScript data
+- How to read through nested objects and arrays better
+- How to make my code cleaner by using one reusable function instead of repeating myself
+- I learned that understanding the data structure first makes coding way easier
+
+### What I built
+- Built fetch-mini-project.js
+- Used a public API to get real data
+- Created a function that fetches the data and prints a clean summary
+- Practiced using template literals to display the result clearly
+- Practiced reading API data and pulling out only the values I needed
+
+### Mistakes made
+- Tried to access data before fully understanding how the API response was structured
+- Got confused with nested objects and arrays
+- Had to slow down and console.log the data first before trying to use it
+- Forgot that async functions need await when waiting for fetch() and .json()
+
+### Key insight
+- Before coding with an API, I need to look at the data first and understand what it looks like.
+- Fetch is not just about grabbing data. The real skill is knowing how to read the response and pull out what I need.
+
+### Next session
+- Day 9 — Python basics: lists, dictionaries, functions
