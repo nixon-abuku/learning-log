@@ -1,10 +1,10 @@
 # Nixon Abuku — Roadmap Progress
 
 ## Current Status
-- Week: 1
-- Day: 1
-- Last session: May 6 2026
-- Next session: May 8 2026 (Day 2)
+- Week: 2
+- Day: 10 completed
+- Last session: May 17 2026
+- Next session: May 18 2026 (Day 11 — requests library + CSV reader/writer script)
 
 ## Sessions Completed
 ### Day 1 — May 6 2026
@@ -194,3 +194,64 @@
 
 ### Next session
 - Day 9 — Python basics: lists, dictionaries, functions
+
+## May 17 2026 — Day 9 + Day 10 Catch-up
+
+### What i learned
+- I learned that even when I feel rusty mentally, I can still show up and get work done for consistency
+- Python lists are basically like JavaScript arrays
+- Python dictionaries are basically like JavaScript objects with key value pairs
+- Python does not use const, let, semicolons, curly braces, or .length like JavaScript
+- len() is used to count items in a Python list
+- for loops in Python read almost like plain English: for shift in shifts
+- Indentation matters in Python because it replaces curly braces
+- Python functions use def instead of function
+- F-strings are used in Python instead of JavaScript template literals
+- open() is used to read files in Python
+- The with open() pattern is the better way because it closes the file automatically
+- 'w' mode lets Python write to a file and create the file if it does not exist
+- import brings in Python modules like csv
+- csv.reader reads CSV files and gives each row back like a list
+
+### What I built
+- Rebuilt monthly-paycheck-calculator from memory as a JavaScript warmup
+- Used .filter() to separate high paycheck weeks and low paycheck weeks
+- Used .forEach() to display each week and paycheck
+- Used .reduce() to calculate high paycheck total, low paycheck total, and full monthly total
+- Created python-practice folder and started a new Python repo
+- Built day9.py with Python lists, loops, dictionaries, and a function
+- Built day10.py to read shifts.txt, write summary.txt, and read shifts.csv
+- Created and pushed the python-practice GitHub repo
+
+### Commands used
+- git init — started the new Python repo
+- git add . — added all files at once
+- git commit -m "..." — saved the Python work
+- git push — pushed the work to GitHub
+- /usr/bin/python3 day9.py — ran Python file
+- /usr/bin/python3 day10.py — ran Python file
+
+### Mistakes made
+- Put a semicolon in Python because I was still thinking in JavaScript
+- Tried to use .length in Python instead of len()
+- Forgot dictionary keys need quotes in Python
+- Mixed up list access and dictionary access
+- Used backticks like JavaScript instead of Python f-strings
+- Got confused with quotes inside f-strings
+- Passed the whole list into a function when the function needed one single item
+- Used open(summary.txt) without quotes and got a NameError
+- Used print() when I needed summary.write() to write into the file
+- Tried csv.reader() without passing in the CSV file
+- Looped through the raw CSV file instead of looping through the reader variable
+- Typo: imprt instead of import
+
+### Key insight
+- Today did not feel sharp, but it still counted because I showed up and built.
+- Python concepts are not brand new — a lot of them match JavaScript, but the syntax is different.
+- Files matter in backend because data is not always in a database. Sometimes it is logs, configs, exports, or CSV files.
+- I should not rush the CSV reader/writer proof item while tired. It is better to do it fresh and actually understand it.
+
+### Next session
+- Day 11 Monday — requests library + build the CSV reader/writer script
+- This is the Phase 1 proof item, so I need to do it properly instead of rushing it tired
+
