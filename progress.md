@@ -2,9 +2,9 @@
 
 ## Current Status
 - Week: 2
-- Day: 10 completed
-- Last session: May 17 2026
-- Next session: May 18 2026 (Day 11 — requests library + CSV reader/writer script)
+- Day: 12 started
+- Last session: May 18 2026
+- Next session: May 19 2026 (Day 13 — CSS deeper: padding, margin, fonts, flexbox basics)
 
 ## Sessions Completed
 ### Day 1 — May 6 2026
@@ -15,7 +15,7 @@
 - Next: JavaScript variables and data types
 
 ## Projects Status
-- [ ] Portfolio website
+- [ ] Portfolio website — started May 18, structure built
 - [ ] Job Tracker API
 - [ ] Full-stack Job Tracker
 - [ ] Docker + CI/CD
@@ -255,3 +255,70 @@
 - Day 11 Monday — requests library + build the CSV reader/writer script
 - This is the Phase 1 proof item, so I need to do it properly instead of rushing it tired
 
+## May 18 2026 — Day 11 Complete + Day 12 Started
+
+### What i learned
+- I learned that just because I forget syntax does not mean I forgot everything
+- csv.reader reads the CSV file and gives each row back as a list
+- The first row in a CSV is usually the header row and I can skip it using next(reader)
+- CSV numbers come in as strings first, so I have to convert them with int() before doing math
+- Running totals start at 0 before the loop and then get updated inside the loop
+- total_pay = total_pay + pay means keep adding each week's pay instead of replacing the total
+- csv.writer writes data into a new CSV file
+- writer.writerow() needs parentheses because it is a function call, not square brackets
+- HTML is the structure of the page
+- CSS is what controls how the page looks
+- The head has page setup like title and stylesheet link
+- The body has what actually shows on the page
+- section tags help organize the portfolio into clean parts
+- ul is the whole list and li is each item inside the list
+
+### What I built
+- Built day11.py / csv-summary script that reads shift data from a CSV file
+- Used csv.reader to read shifts2.csv
+- Skipped the header row using next(reader)
+- Converted hours and rate from strings into integers
+- Calculated total hours worked and total pay earned
+- Printed the total pay and total hours in the terminal
+- Created summaryshift2.csv using csv.writer
+- Wrote total_hours and total_pay into the new CSV file
+- Completed the Python CSV reader/writer proof item for Phase 1
+- Started the portfolio website
+- Built index.html with my name, short bio, GitHub link, projects, skills, education, and work experience
+- Connected styles.css to index.html
+- Added a dark background and white text
+- Got the portfolio page opening in the browser
+
+### Commands used
+- /usr/bin/python3 day11.py — ran the Python CSV summary script
+- git add . — added all updated files at once
+- git commit -m "..." — saved the Python CSV proof item and portfolio work
+- git push — pushed the work to GitHub
+
+### Mistakes made
+- I could not remember the csv.reader syntax at first
+- Tried csvopen even though CSV files are still opened with open()
+- Passed 'shifts' as a string into csv.reader instead of passing the shifts variable
+- Tried to start the for loop before storing csv.reader in a variable
+- Forgot how to skip the CSV header row at first
+- Tried to convert two values with int() at the same time
+- Tried to use row[3] even though the CSV only had row[0], row[1], and row[2]
+- Converted values with int() but did not store them in variables at first
+- Updated pay instead of updating total_pay
+- Set total_pay = pay + 0 instead of accumulating with total_pay = total_pay + pay
+- Used writer.writerow[] instead of writer.writerow()
+- In HTML, I used h4 for things that should have been descriptions
+- Used ul like each skill item instead of using one ul with li items inside
+
+### Key insight
+- Today showed me that forgetting syntax is not the same as starting over.
+- I can forget the exact syntax and still rebuild it with hints because the concept is slowly getting in my head.
+- Active learning works because I had to struggle, make mistakes, fix them, and explain what I was doing.
+- The CSV script matters because backend work is not always databases. Sometimes data comes from CSV files, logs, exports, or configs.
+- My portfolio does not have to look perfect on day one. The structure matters first, then I improve the design with CSS.
+- I should measure myself against Day 1, not against mastery. I am not a master yet, but I am building proof that I am improving.
+
+### Next session
+- Day 13 Tuesday — CSS deeper: padding, margin, fonts, flexbox basics
+- Make the portfolio look less like a plain document and more like a real page
+- Keep using active recall before starting: rewrite one small piece from memory before moving forward
