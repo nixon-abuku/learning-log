@@ -2,9 +2,9 @@
 
 ## Current Status
 - Week: 2
-- Day: 12 started
-- Last session: May 18 2026
-- Next session: May 19 2026 (Day 13 — CSS deeper: padding, margin, fonts, flexbox basics)
+- Day: 14 complete
+- Last session: May 21 2026
+- Next session: May 22 2026 (Day 15 — Portfolio polish + README + PostgreSQL setup / first SQL query)
 
 ## Sessions Completed
 ### Day 1 — May 6 2026
@@ -15,7 +15,8 @@
 - Next: JavaScript variables and data types
 
 ## Projects Status
-- [ ] Portfolio website — started May 18, structure built
+- [x] Portfolio website — live on Vercel May 21
+  - Live URL: https://portfolio-omega-plum-89.vercel.app
 - [ ] Job Tracker API
 - [ ] Full-stack Job Tracker
 - [ ] Docker + CI/CD
@@ -322,3 +323,109 @@
 - Day 13 Tuesday — CSS deeper: padding, margin, fonts, flexbox basics
 - Make the portfolio look less like a plain document and more like a real page
 - Keep using active recall before starting: rewrite one small piece from memory before moving forward
+
+## May 20 2026 — Day 13 Complete + Day 14 Started
+
+### What i learned
+- I learned that missing one day does not mean the whole roadmap is messed up if I come back and catch up properly
+- CSS is not just about colors, it is really about spacing, layout, and making the page feel less like a plain document
+- padding is the space inside an element
+- margin is the space outside an element
+- max-width keeps the page from stretching too wide across the whole screen
+- Font choice matters because the Inter font made the portfolio look cleaner right away
+- Section spacing matters because it makes the page easier to read
+- Border lines under headings can make sections look more intentional
+- Flexbox is used for layout and helps control whether things are stacked or side by side
+- flex-direction: column means items stack vertically
+- flex-direction: row means items go side by side horizontally
+- Tailwind CSS is different from regular CSS because I add ready-made classes directly inside my HTML instead of writing every style in styles.css
+- Tailwind reset the default browser styles at first, so the page looked worse for a second, but that showed me Tailwind gives me full control
+
+### What I built
+- Continued styling my portfolio website
+- Added better spacing using padding and margin
+- Added max-width so the page does not stretch too wide
+- Added the Inter font to make the portfolio look more professional
+- Added teal accent lines under the section headings
+- Created a hero section for my name, description, and GitHub link
+- Practiced flexbox basics on the hero section
+- Added Tailwind CSS using the CDN link in the HTML head
+- Started rebuilding the portfolio styling with Tailwind classes
+- Added Tailwind classes to the body, h1, h2, and links
+- Committed and pushed the CSS/Tailwind progress to GitHub
+
+### Commands used
+- git add . — added the portfolio updates
+- git commit -m "add CSS styling, font, spacing, section headings, flexbox hero" — saved the CSS/flexbox work
+- git push — pushed the portfolio updates to GitHub
+
+### Mistakes made
+- I mixed up git add and git commit and tried putting the commit message with git add
+- At first I expected flexbox row to show a big difference, but the elements were still block elements so it did not look different
+- Tailwind reset the default styles and made the page look plain again at first
+- I had to slow down and understand that Tailwind does not style things for me automatically, I still have to add the right classes
+- I almost wanted to jump straight to a better looking AI-generated design instead of learning the CSS/Tailwind piece myself
+
+### Key insight
+- Today showed me that design is not magic. A portfolio starts looking better from small things like spacing, font, max-width, colors, borders, and layout.
+- I also learned that I should not compare my beginner portfolio to polished developer portfolios yet. I need to build the real thing first and keep improving it every week.
+- Tailwind is powerful, but I still have to understand what the classes are doing instead of just copying them.
+
+### Next session
+- Day 14 Thursday — portfolio build day
+- Add navbar, project cards, skill tags, and layout improvements
+- Keep the goal simple: make it better and get closer to deployment
+
+## May 21 2026 — Day 14 Complete
+
+### What i learned
+- I learned that a deployed basic portfolio is better than a perfect portfolio that is not live
+- A navbar helps users jump to different sections on the page
+- id attributes connect the navbar links to the sections on the same page
+- Project cards make my work look more organized instead of just listing projects as plain text
+- Skill tags look more professional than a normal bullet list
+- A photo in the hero section makes the portfolio feel more real and personal
+- The alt attribute on an image is important because it describes the image
+- object-cover helps the photo crop properly without stretching it
+- Vercel can deploy a static HTML/CSS portfolio from GitHub
+- Once the portfolio is connected to Vercel, every future GitHub push can update the live site
+- I learned not to gitignore the photo because Vercel needs the image from GitHub to show it on the live website
+- I can save the AI-generated design as a future target, but I should not let it stop me from deploying what I actually built
+
+### What I built
+- Added a top navbar with jump links
+- Added project cards for JavaScript Paycheck Calculator and Python Shift CSV Analyzer
+- Added links from the project cards to my GitHub repos
+- Added skill tags for JavaScript, Python, SQL, Git, HTML, and CSS
+- Added my photo to the hero section as photo.jpeg
+- Updated my headline/description to sound stronger
+- Added .gitignore for the design reference image only
+- Committed and pushed the portfolio updates to GitHub
+- Deployed the portfolio to Vercel
+- Got my first live portfolio URL: https://portfolio-omega-plum-89.vercel.app
+
+### Commands used
+- echo "design.jpeg" > .gitignore — ignored the design reference image
+- git add . — added the portfolio updates
+- git commit -m "add photo, navbar, project cards, skill tags" — saved the portfolio build work
+- git push — pushed the portfolio to GitHub
+
+### Mistakes made
+- I almost wanted to gitignore the photo, but that would have stopped the photo from showing on Vercel
+- I started comparing my current portfolio to a much more polished portfolio and it made mine feel too basic
+- I had to remind myself that my current goal is a real deployed portfolio, not a perfect design yet
+- I had a typo in one of the project card descriptions and needed to clean it up
+- I wanted to build the AI-generated design right away, but that design is more of a Week 9 / React-level target
+
+### Key insight
+- Today was a big milestone because I got a real live URL. This is not just practice sitting on my laptop anymore.
+- My portfolio is basic, but it is real, public, and deployable. That matters more than waiting until it looks perfect.
+- I can keep improving the design over time as I learn more CSS, Tailwind, and later React.
+- This is my first public proof item for Phase 1, and now I have something I can actually put on my resume.
+
+### Next session
+- Day 15 Friday — portfolio polish + README
+- Clean up any remaining portfolio issues
+- Start SQL early if there is time
+- Install PostgreSQL on my Mac, connect to it from the terminal, and write my first SELECT query
+
