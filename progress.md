@@ -1,10 +1,10 @@
 # Nixon Abuku — Roadmap Progress
 
 ## Current Status
-- Week: 2
-- Day: 14 complete
-- Last session: May 21 2026
-- Next session: May 22 2026 (Day 15 — Portfolio polish + README + PostgreSQL setup / first SQL query)
+- Week: 3
+- Day: 15 complete
+- Last session: May 22 2026
+- Next session: May 24 2026 (Day 16 — Long SQL session: JOINs, GROUP BY, schemas, and table relationships)
 
 ## Sessions Completed
 ### Day 1 — May 6 2026
@@ -17,6 +17,7 @@
 ## Projects Status
 - [x] Portfolio website — live on Vercel May 21
   - Live URL: https://portfolio-omega-plum-89.vercel.app
+  - README completed May 22
 - [ ] Job Tracker API
 - [ ] Full-stack Job Tracker
 - [ ] Docker + CI/CD
@@ -428,4 +429,80 @@
 - Clean up any remaining portfolio issues
 - Start SQL early if there is time
 - Install PostgreSQL on my Mac, connect to it from the terminal, and write my first SELECT query
+
+## May 22 2026 — Day 15 Complete
+
+### What i learned
+- I learned that a README is part of making a project look professional, not just something extra
+- PostgreSQL is where a backend app can store data permanently
+- A database is basically storage for data, and a backend needs one because the app has to save and use data
+- A table organizes data inside the database using rows and columns, almost like a spreadsheet
+- Each row in the job_tracker table is one job application
+- Each column describes one piece of that job application like job_id, company, job_title, date_applied, and status
+- SERIAL means the id auto-increments by itself, so I do not have to manually create the id
+- VARCHAR(255) is used for text values like company, job title, and status
+- DATE is used when the database needs to store an actual date
+- CREATE DATABASE creates a new database
+- \c learning connects me to the learning database inside psql
+- DBeaver is a visual tool I can use to work with PostgreSQL instead of doing everything in the terminal
+- CREATE TABLE creates a table and defines the columns plus the data type for each column
+- INSERT INTO adds new rows into a table
+- I should not include job_id inside the INSERT because SERIAL handles that automatically
+- Text values and date values need single quotes in SQL
+- PostgreSQL dates should be written in the format 'YYYY-MM-DD'
+- SELECT * FROM job_tracker shows all columns from the job_tracker table
+- WHERE lets me filter rows based on a condition
+- WHERE status = 'APPLIED' is basically like using .filter() in JavaScript, but in SQL syntax
+
+### What I built
+- Completed the portfolio README
+- Connected to PostgreSQL from the terminal using psql
+- Created the learning database
+- Connected to the learning database in DBeaver
+- Opened a new SQL script inside DBeaver
+- Created my first job_tracker table
+- Added columns for job_id, company, job_title, date_applied, and status
+- Used SERIAL, VARCHAR(255), and DATE as SQL data types
+- Inserted a job application row into the job_tracker table
+- Inserted more sample job rows with different statuses
+- Used SELECT * to view the rows in the table
+- Used WHERE to filter the table by status
+- Practiced explaining the SQL in plain English before running it
+- Used my notebook first before typing some of the SQL in DBeaver
+
+### Commands / SQL used
+- psql postgres — connected to PostgreSQL from the terminal
+- CREATE DATABASE learning; — created the learning database
+- \c learning — connected to the learning database
+- CREATE TABLE job_tracker (...) — created the job tracker table
+- INSERT INTO job_tracker (...) VALUES (...); — added job application rows
+- SELECT * FROM job_tracker; — viewed all rows and columns
+- SELECT * FROM job_tracker WHERE status = 'APPLIED'; — filtered rows by status
+- Ctrl + Enter — ran SQL statements inside DBeaver
+
+### Mistakes made
+- I did not remember the command to open PostgreSQL in the terminal at first
+- DBeaver gave an error because the connection was using the wrong PostgreSQL role / username
+- I had to fix the connection before working inside DBeaver
+- I almost included job_id in the INSERT even though SERIAL creates the id automatically
+- I forgot that text values need single quotes in SQL
+- I forgot that the date also needs single quotes
+- I used date as the column name in the INSERT, but the real column name was date_applied
+- I had to read the error message carefully instead of guessing
+- I had to slow down and match my INSERT columns to the table columns exactly
+
+### Key insight
+- Today made SQL feel less scary because it connects to stuff I already learned.
+- INSERT is like adding data.
+- SELECT is like reading data.
+- WHERE is like filtering data.
+- The job_tracker table is basically the database version of the Job Tracker API I will build later.
+- The same logic keeps showing up in different languages. JavaScript has .filter(), Python has loops and files, and SQL has WHERE.
+- Reading errors is becoming part of the work. The error told me exactly what column was wrong, and I fixed it.
+
+### Next session
+- Saturday May 23 — rest day
+- Sunday May 24 — long SQL session
+- Go deeper into SELECT, INSERT, UPDATE, DELETE, JOIN, GROUP BY, schemas, and table relationships
+- Keep writing the logic in plain English before running SQL
 
