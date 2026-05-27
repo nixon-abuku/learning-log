@@ -1,10 +1,11 @@
 # Nixon Abuku — Roadmap Progress
 
 ## Current Status
-- Week: 3
-- Day: 15 complete
-- Last session: May 22 2026
-- Next session: May 24 2026 (Day 16 — Long SQL session: JOINs, GROUP BY, schemas, and table relationships)
+- Week: 4
+- Day: 18 complete
+- Last session: May 27 2026
+- Current phase: Phase 2 started early — Node.js + Express basics
+- Next session: May 28 2026 (Day 19 — Node/Express routes, JSON responses, and request/response practice)
 
 ## Sessions Completed
 ### Day 1 — May 6 2026
@@ -18,7 +19,10 @@
 - [x] Portfolio website — live on Vercel May 21
   - Live URL: https://portfolio-omega-plum-89.vercel.app
   - README completed May 22
-- [ ] Job Tracker API
+- [x] Python CSV reader/writer proof item — completed May 18
+- [x] SQL Phase 1 proof item — PostgreSQL + DBeaver + queries completed May 26
+- [x] Node practice repo — first Express server pushed May 27
+- [ ] Job Tracker API — Phase 2 main project coming next
 - [ ] Full-stack Job Tracker
 - [ ] Docker + CI/CD
 - [ ] AWS deployment
@@ -506,3 +510,215 @@
 - Go deeper into SELECT, INSERT, UPDATE, DELETE, JOIN, GROUP BY, schemas, and table relationships
 - Keep writing the logic in plain English before running SQL
 
+## May 25 2026 — Day 16 SQL Deep Dive
+
+### What i learned
+- I learned that missing the Sunday long session does not mean the roadmap is broken if I come back and do the work
+- UPDATE changes existing rows instead of creating new rows
+- SET tells SQL what value I want to change
+- WHERE is very important with UPDATE and DELETE because it controls which exact row gets changed or removed
+- DELETE removes rows from a table
+- DELETE needs FROM before the table name
+- ORDER BY arranges data in a certain order
+- LIMIT controls how many rows come back
+- I can insert multiple rows at once using one INSERT statement with multiple VALUES
+- PRIMARY KEY identifies each row uniquely
+- FOREIGN KEY connects one table to another table
+- Table relationships are how real backend databases connect data instead of putting everything in one giant table
+- JOIN lets me connect data from two tables together
+- GROUP BY lets me group rows together and summarize them
+- COUNT, SUM, and AVG are aggregate functions that help summarize data
+- SQL is not just storing data. It is also a way to ask questions about the data
+
+### What I built
+- Continued working inside the learning PostgreSQL database
+- Used DBeaver to run SQL visually
+- Added more job application rows to the job_tracker table
+- Inserted multiple companies and statuses in one INSERT statement
+- Updated Amazon from INTERVIEWING to OFFERED
+- Deleted the Meta row from the table
+- Used SELECT * to check if the changes worked
+- Practiced ORDER BY to sort job applications
+- Practiced LIMIT to return only a certain number of rows
+- Practiced filtering with WHERE
+- Practiced table relationship thinking with primary keys and foreign keys
+- Practiced JOINs to connect related tables
+- Practiced GROUP BY with COUNT / SUM / AVG style summary thinking
+- Kept using my notebook to write the SQL logic before running it
+
+### Commands / SQL used
+- INSERT INTO job_tracker (...) VALUES (...), (...), (...); — inserted multiple rows at once
+- UPDATE job_tracker SET status = 'OFFERED' WHERE company = 'Amazon'; — changed an existing row
+- DELETE FROM job_tracker WHERE company = 'Meta'; — removed one row
+- SELECT * FROM job_tracker; — checked the table
+- SELECT * FROM job_tracker ORDER BY date_applied; — sorted rows
+- SELECT * FROM job_tracker LIMIT 3; — limited the result
+- JOIN — connected tables together
+- GROUP BY — grouped rows for summaries
+- COUNT(), SUM(), AVG() — summarized data
+
+### Mistakes made
+- I wrote UPDATE with WHERE before SET at first
+- I had to learn that SQL has a specific order: UPDATE table, then SET, then WHERE
+- I wrote DELETE job_tracker instead of DELETE FROM job_tracker at first
+- I had to slow down and remember that without WHERE, UPDATE or DELETE can affect too many rows
+- I had to keep checking exact column names instead of guessing
+- I still needed reminders that SQL statements have a pattern and the order matters
+
+### Key insight
+- Today made SQL feel more real because I was not just creating a table anymore. I was changing, deleting, sorting, limiting, and connecting data.
+- UPDATE and DELETE showed me why databases require careful thinking. One small missing WHERE can change the wrong data.
+- JOINs showed me that real databases are built from connected tables, not one giant messy table.
+- GROUP BY showed me that SQL can summarize information, not just store it.
+- This is all preparing me for the Job Tracker API because the backend will eventually send requests to PostgreSQL and PostgreSQL will return the data.
+
+### Next session
+- Day 17 Tuesday — SQL review, rebuild practice, HackerRank SQL problems, and Phase 1 audit
+- Make sure I can still write the main SQL commands without just copying them
+- Check that Phase 1 proof items are complete before moving into Node.js / Express
+
+## May 26 2026 — Day 17 SQL Review + Phase 1 Audit
+
+### What i learned
+- I learned that review is not passive watching. Review means rebuilding from memory and checking what I actually remember
+- SQL syntax still needs repetition, but the concepts are starting to connect
+- SELECT reads data
+- INSERT adds data
+- UPDATE changes data
+- DELETE removes data
+- WHERE filters rows
+- ORDER BY sorts rows
+- LIMIT controls how many rows come back
+- GROUP BY groups data so I can summarize it
+- JOIN connects tables together using related columns
+- HackerRank SQL problems are useful because they force me to read the question and write the query myself
+- The proof items matter because they show actual progress instead of just saying I studied
+- Phase 1 was not about being a master. It was about building the foundation and proof that I can keep going
+
+### What I built / reviewed
+- Reviewed the SQL commands from the previous session
+- Rebuilt the SQL logic from memory instead of just looking at old queries
+- Practiced SELECT, WHERE, ORDER BY, LIMIT, UPDATE, DELETE, JOIN, and GROUP BY
+- Completed 5 HackerRank SQL practice problems
+- Audited Phase 1 proof items
+- Confirmed the portfolio is live on Vercel
+- Confirmed the Python CSV reader/writer script is complete
+- Confirmed the PostgreSQL / SQL proof item is complete
+- Confirmed the GitHub repos are showing real work
+- Confirmed I am ready to start Phase 2 early with Node.js and Express
+
+### Commands / SQL reviewed
+- SELECT * FROM table_name;
+- SELECT column_name FROM table_name WHERE condition;
+- INSERT INTO table_name (...) VALUES (...);
+- UPDATE table_name SET column = value WHERE condition;
+- DELETE FROM table_name WHERE condition;
+- ORDER BY column_name;
+- LIMIT number;
+- JOIN related tables
+- GROUP BY column_name
+- COUNT(), SUM(), AVG()
+
+### Mistakes made
+- I still needed repetition with exact SQL order
+- I had to slow down and not treat WHERE as a standalone command
+- I had to remember that column names must match exactly
+- I had to remind myself that HackerRank questions are about understanding the question first, not rushing into typing SQL
+- I had to stop measuring myself against mastery and measure myself against where I started on Day 1
+
+### Key insight
+- Phase 1 is basically complete now.
+- I am not a master yet, but I have real proof items: a live portfolio, JavaScript mini projects, a Python CSV script, and real PostgreSQL/SQL practice.
+- The biggest improvement is not just the code. It is that I am learning to think before I code, write the logic in plain English, make mistakes, read errors, and fix them.
+- I am ready to move into Phase 2 because Node.js and Express will build directly on the JavaScript and SQL foundation I already started.
+
+### Next session
+- Day 18 Wednesday — start Node.js and Express
+- Build the first basic server
+- Understand runtime vs framework
+- Learn request and response using the waiter / restaurant analogy
+
+## May 27 2026 — Day 18 Node.js + Express Started
+
+### What i learned
+- I learned that Node.js is not a framework. Node.js is a runtime environment
+- A runtime environment means it lets JavaScript run outside the browser
+- I realized I had already been using Node.js when I ran files like node day1.js or node country-comparison.js in the terminal
+- Express is the framework built on top of Node.js that makes it easier to build servers
+- React is a library for the frontend, not technically a framework
+- npm means Node Package Manager
+- npm init means initialize the folder as a Node project for the first time
+- package.json is like the project's ID card because it tracks project information and dependencies
+- npm install express downloads Express into the project
+- node_modules is where installed packages live, but I should not push node_modules to GitHub
+- .gitignore tells Git what files or folders to ignore
+- A server is like a waiter: it receives a request and sends back a response
+- The client is like the customer
+- The server is like the waiter
+- The database is like the kitchen
+- A route is an instruction that tells the server what to do when someone visits a specific path
+- GET means the client is asking the server to give something back
+- '/' is the home route / main entrance of the server
+- req means request, which is what the client sends
+- res means response, which is what the server sends back
+- res.send() sends text or data back to the client
+- app.listen() tells the server what port to listen on
+- localhost:3000 is my own computer serving the app locally on port 3000
+
+### What I built
+- Created a new folder called node-practice
+- Initialized a Node project using npm init -y
+- Installed Express using npm install express
+- Created package.json and package-lock.json
+- Created .gitignore and ignored node_modules
+- Created index.js
+- Imported Express with require('express')
+- Created an Express app with express()
+- Built my first route with app.get('/')
+- Sent back "Hello World" using res.send()
+- Started the server on port 3000 using app.listen()
+- Ran the server with node index.js
+- Opened localhost:3000 in the browser and saw Hello World
+- Created a GitHub repo for node-practice
+- Committed and pushed the first Express server to GitHub
+
+### Commands used
+- npm init -y — created package.json with default settings
+- npm install express — installed Express
+- echo "node_modules" > .gitignore — stopped Git from tracking node_modules
+- node index.js — ran the Express server
+- Ctrl + C — stopped the server
+- git init — started the repo
+- git add . — staged all files
+- git commit -m "first express server - hello world on port 3000" — saved the first server
+- git push — pushed node-practice to GitHub
+
+### Mistakes made
+- I thought Node.js was a framework at first, but learned it is a runtime
+- I thought React was a framework, but learned it is a frontend library
+- I thought runtime meant how long the code runs, but learned it means the environment where code runs
+- At first I thought the input was console.log("Hello World"), but then learned the input is the client request
+- I started thinking about fetch / async / await, but that is for making requests, and today I was building the server that receives requests
+- I tried const app = require('express') first, but then learned the better convention is const express = require('express') and const app = express()
+- I forgot express needs quotes inside require('express')
+- I used a backslash instead of a forward slash for the route path at first
+- I tried to put a string directly in app.get() instead of giving it a function
+- I wrote res("Hello World") instead of res.send("Hello World")
+- I accidentally put a quote after res in function(req, res)
+- I misspelled app.listen as app.listien
+- I used port 300 instead of 3000 at first
+- I got a git pathspec error while committing, but I fixed it and still pushed the repo
+
+### Key insight
+- Today felt like a major shift because I built my first real server.
+- Before today, JavaScript was mostly scripts and mini projects. Now I used JavaScript to make something that listens for a browser request and sends a response back.
+- The waiter analogy helped everything click: browser asks, server responds, database will later provide the stored data.
+- This is the beginning of the backend part of the roadmap.
+- The Job Tracker API does not feel as abstract anymore because I can see the first piece: a server listening on a port and responding to requests.
+
+### Next session
+- Day 19 Thursday — continue Node.js and Express
+- Add more routes
+- Practice JSON responses
+- Understand request and response more deeply
+- Start thinking about how routes like /jobs will eventually connect to PostgreSQL
