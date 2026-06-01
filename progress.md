@@ -1,11 +1,11 @@
 # Nixon Abuku — Roadmap Progress
 
 ## Current Status
-- Week: 4
-- Day: 18 complete
-- Last session: May 27 2026
-- Current phase: Phase 2 started early — Node.js + Express basics
-- Next session: May 28 2026 (Day 19 — Node/Express routes, JSON responses, and request/response practice)
+- Week: 5
+- Day: 20 complete
+- Last session: June 1 2026
+- Current phase: Phase 2 — Node.js + Express API foundations
+- Next session: June 2 2026 (Day 21 — PUT and DELETE routes + start planning the real Job Tracker API structure)
 
 ## Sessions Completed
 ### Day 1 — May 6 2026
@@ -22,6 +22,7 @@
 - [x] Python CSV reader/writer proof item — completed May 18
 - [x] SQL Phase 1 proof item — PostgreSQL + DBeaver + queries completed May 26
 - [x] Node practice repo — first Express server pushed May 27
+  - Added JSON responses, /jobs GET route, nodemon, npm run dev, Postman testing, and POST /jobs by June 1
 - [ ] Job Tracker API — Phase 2 main project coming next
 - [ ] Full-stack Job Tracker
 - [ ] Docker + CI/CD
@@ -722,3 +723,149 @@
 - Practice JSON responses
 - Understand request and response more deeply
 - Start thinking about how routes like /jobs will eventually connect to PostgreSQL
+
+## May 28 2026 — Day 19 Node/Express JSON Routes + Postman
+
+### What i learned
+- I learned that JSON means JavaScript Object Notation
+- JSON looks like JavaScript objects and arrays, and it is the main format APIs use to send data
+- res.json() sends JSON back to the client instead of plain text
+- res.json() should usually send an object or an array, not just a random string
+- A JSON API response can look like {"message": "Hello World"} or an array of job objects
+- A route like GET /jobs can return fake job data first before connecting to PostgreSQL later
+- A hardcoded jobs array is temporary, but it helps me understand what the API will eventually return from the database
+- nodemon watches my files and restarts the server automatically when I save changes
+- --save-dev means the package is only needed while developing, not for production users
+- npx runs a package installed locally in the project
+- npm run dev can be used as a shortcut when I add a dev script in package.json
+- HTTP status codes tell the client what happened with the request
+- 200 means OK / request worked
+- 201 means Created / something new was created
+- 400 means Bad Request / the client sent bad data
+- 404 means Not Found / the route or resource does not exist
+- 500 means Internal Server Error / something broke on the server
+- Postman is used to test APIs because the browser mostly sends GET requests
+- Postman lets me send GET, POST, PUT, DELETE and see the status code, response time, response size, and JSON body
+
+### What I built
+- Updated the home route from plain text to a JSON response
+- Changed the / route to return a message object using res.json()
+- Added a fake jobs array with 3 job objects
+- Added a GET /jobs route that returns all jobs as JSON
+- Installed nodemon as a development dependency
+- Used npx nodemon index.js to run the local nodemon package
+- Added an npm run dev script in package.json
+- Started the server using npm run dev
+- Updated the /jobs route to explicitly return status code 200
+- Installed and opened Postman
+- Sent a GET request to localhost:3000/jobs in Postman
+- Confirmed the /jobs endpoint returned 200 OK and the jobs array as JSON
+- Committed and pushed the Node/Express updates to GitHub
+
+### Commands used
+- npm install --save-dev nodemon — installed nodemon for development
+- npx nodemon index.js — ran nodemon from the local project
+- npm run dev — started the server using the dev script
+- git add . — staged the Node updates
+- git commit -m "add /jobs route, nodemon, npm run dev script" — saved the JSON route and nodemon work
+- git commit -m "add status codes, test with Postman" — saved the status code and Postman testing work
+- git push — pushed the updates to GitHub
+
+### Mistakes made
+- I first guessed res.send().json, but learned the method is just res.json()
+- I put the colon inside the message key like "message:" instead of writing "message": outside the quotes
+- I forgot the status field in the first version of the fake jobs array
+- I wrote Project Manage instead of Project Manager in one job role
+- nodemon did not run globally, so I had to use npx nodemon index.js
+- In Postman I accidentally sent the URL with a hidden newline at the end, so I got Cannot GET /jobs%0A
+- I had to clear the URL and type localhost:3000/jobs cleanly
+- I still owed Codewars and HackerRank from the day before, but I did not complete them that night
+
+### Key insight
+- Today made the server feel more like a real API.
+- Yesterday the server only said Hello World, but today it returned real JSON data from a /jobs endpoint.
+- The Job Tracker API is starting to make more sense because I can see the shape of it: routes return data, Postman tests the routes, and later PostgreSQL will replace the fake jobs array.
+- Postman is important because I cannot fully test real API behavior from the browser alone.
+
+### Next session
+- Continue Node.js / Express
+- Learn POST routes
+- Use req.body to receive data from a client
+- Add a new job into the jobs array
+- Keep the daily Codewars and HackerRank habit from slipping
+
+## June 1 2026 — Day 20 POST /jobs + Foundation Review
+
+### What i learned
+- I learned that taking a few days off makes review important before adding new topics
+- I did not study from Friday May 29 to Sunday May 31 because I was busy with house chores, cleaning, and removing old furniture
+- Even after the break, I still remembered the basic server flow better than I thought
+- GET means the client is requesting / reading data from the server
+- POST means the client is sending data to the server so something can be created
+- Data sent with POST does not live in the URL. It lives in the request body
+- req is the request object, and req.body is where the data from the client lives
+- Express does not automatically understand incoming JSON data unless I tell it to
+- app.use(express.json()) is middleware that runs before the route and turns incoming raw JSON text into a JavaScript object
+- Middleware is like a manager / security guard that checks the request before it reaches the route
+- express.json() does not turn JavaScript into JSON. It takes incoming raw text that looks like JSON and turns it into a JavaScript object I can use
+- app.post() is used to create a POST route
+- jobs.length + 1 can be used to create the next id when working with a fake jobs array
+- jobs.push(newJob) adds the new job object into the jobs array
+- res.status(201).json(newJob) sends back the newly created job with the Created status
+- Postman can send JSON in the Body tab using raw + JSON
+- The best way to review Phase 1 is not to reread everything, but to keep using those concepts inside Phase 2
+
+### What I built
+- Started with a memory review because I had not reviewed for a few days
+- Rebuilt a basic Express server from memory in a practice file called index2.js
+- Reviewed the four basic Express server blocks: import Express, create app, define routes, start listening
+- Added app.use(express.json()) to index.js
+- Built a POST /jobs route
+- Created a newJob object using req.body.company, req.body.role, and req.body.status
+- Used jobs.length + 1 to create the new id
+- Used jobs.push(newJob) to add the new job into the jobs array
+- Sent back the new job with status 201
+- Tested POST /jobs in Postman using JSON body data
+- Added Microsoft / Junior Developer / APPLIED as a new job
+- Verified with GET /jobs that the jobs array now had 4 jobs
+- Did a bottom-up review of Node.js, Express, routes, and middleware
+- Created review.js as another memory practice server on port 4000
+- Ran review.js and confirmed it worked in the browser
+- Planned to delete index2.js and review.js because they were practice files only
+
+### Commands used
+- node index2.js — ran the memory practice server
+- npm run dev — started the main Express server with nodemon
+- node review.js — ran the review server
+- Ctrl + C — stopped running servers
+- git add . — stage updates when committing
+- git commit -m "add POST /jobs route with req.body and 201 status" — planned commit for the POST route work
+- git push — push Node practice updates to GitHub
+
+### Mistakes made
+- I came back rusty because I did not study or review Friday through Sunday
+- In the memory rewrite, I used res.JSON instead of res.json, but JavaScript is case sensitive
+- I first used res.json("Hello World") as a plain string instead of returning an object like {"message": "Hello World"}
+- I had to be reminded that app.listen() needs a callback function wrapping the console.log
+- I named the memory file index2.js, so npm run dev did not run it because the dev script points to index.js
+- I first thought app.use() just tells the server to use express json, but I learned it is middleware that runs before the route
+- I tried to use req.body like a function, but req.body is an object, not something I call
+- I almost wrote app.push(newJob), but app is the Express server. The array is jobs, so the correct idea is jobs.push(newJob)
+- I wrote newJobs at first, but the variable was actually newJob
+- I almost returned the whole jobs array after POST, but the better response is the newly created job
+- In review.js I forgot a comma between req and res
+- I also missed a comma between the route path '/' and the function in app.get()
+
+### Key insight
+- Today was not about rushing forward. It was about getting sharp again after a few days off.
+- I proved that I can rebuild a basic Express server from memory, even if I still need corrections.
+- The logic is slowly connecting: routes are instructions, req is what comes in, res is what goes out, middleware prepares the request, and the jobs array is temporary storage until PostgreSQL is connected.
+- Phase 1 concepts are not gone. Arrays, objects, .push(), functions, and JSON are showing up directly inside Phase 2.
+- I do not need to review all of Phase 1 from scratch. I need to keep doing targeted review and use those concepts inside real backend work.
+
+### Next session
+- Day 21 Tuesday — continue Express CRUD
+- Build PUT /jobs/:id to update a job
+- Build DELETE /jobs/:id to remove a job
+- Start planning the real Job Tracker API structure
+- Keep using morning rewrite / active recall before new topics
