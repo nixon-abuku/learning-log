@@ -2,10 +2,11 @@
 
 ## Current Status
 - Week: 5
-- Day: 20 complete
-- Last session: June 1 2026
+- Day: 23 complete
+- Last session: June 4 2026
 - Current phase: Phase 2 — Node.js + Express API foundations
-- Next session: June 2 2026 (Day 21 — PUT and DELETE routes + start planning the real Job Tracker API structure)
+- Phase 2 progress: CRUD complete in node-practice (GET, POST, PUT, DELETE)
+- Next session: June 5 2026 (Day 24 — error handling middleware + real Job Tracker API setup + PostgreSQL connection)
 
 ## Sessions Completed
 ### Day 1 — May 6 2026
@@ -21,13 +22,24 @@
   - README completed May 22
 - [x] Python CSV reader/writer proof item — completed May 18
 - [x] SQL Phase 1 proof item — PostgreSQL + DBeaver + queries completed May 26
-- [x] Node practice repo — first Express server pushed May 27
-  - Added JSON responses, /jobs GET route, nodemon, npm run dev, Postman testing, and POST /jobs by June 1
+- [x] Node practice repo — Express CRUD foundation complete by June 3
+  - First Express server pushed May 27
+  - Added JSON responses, /jobs GET route, nodemon, npm run dev, Postman testing, POST /jobs, PUT /jobs/:id, and DELETE /jobs/:id
+  - Full fake-array CRUD complete: GET, POST, PUT, DELETE
 - [ ] Job Tracker API — Phase 2 main project coming next
 - [ ] Full-stack Job Tracker
 - [ ] Docker + CI/CD
 - [ ] AWS deployment
 - [ ] Terraform
+
+## Career Readiness Status
+- [x] LinkedIn headline updated for backend + healthcare IT / HL7 lane — June 3
+- [x] LinkedIn About section updated with portfolio and GitHub — June 3
+- [x] LinkedIn skills expanded to 50 skills — June 3
+- [x] Resume updated to target backend SWE + healthcare IT / HL7 integration roles — June 3
+- [x] Started Week 5 light application calibration — June 3
+- [x] Job application tracking moved to a private tracker outside progress.md — June 4
+- [ ] Continue 2–5 light applications this week for market research and practice
 
 ## Project Ideas
 - Shift Schedule API (Week 12)
@@ -511,361 +523,228 @@
 - Go deeper into SELECT, INSERT, UPDATE, DELETE, JOIN, GROUP BY, schemas, and table relationships
 - Keep writing the logic in plain English before running SQL
 
-## May 25 2026 — Day 16 SQL Deep Dive
+## June 2 2026 — Day 21 PUT Route + Type Conversion
 
 ### What i learned
-- I learned that missing the Sunday long session does not mean the roadmap is broken if I come back and do the work
-- UPDATE changes existing rows instead of creating new rows
-- SET tells SQL what value I want to change
-- WHERE is very important with UPDATE and DELETE because it controls which exact row gets changed or removed
-- DELETE removes rows from a table
-- DELETE needs FROM before the table name
-- ORDER BY arranges data in a certain order
-- LIMIT controls how many rows come back
-- I can insert multiple rows at once using one INSERT statement with multiple VALUES
-- PRIMARY KEY identifies each row uniquely
-- FOREIGN KEY connects one table to another table
-- Table relationships are how real backend databases connect data instead of putting everything in one giant table
-- JOIN lets me connect data from two tables together
-- GROUP BY lets me group rows together and summarize them
-- COUNT, SUM, and AVG are aggregate functions that help summarize data
-- SQL is not just storing data. It is also a way to ask questions about the data
+- I learned the difference between HTTP methods and status codes again because I mixed them up at first
+- HTTP methods are the actions: GET, POST, PUT, DELETE
+- Status codes are the results: 200 OK, 201 Created, 404 Not Found, etc.
+- CRUD means Create, Read, Update, Delete
+- GET is used when the client wants to read / request data
+- POST is used when the client wants to create new data
+- PUT is used when the client wants to update existing data
+- DELETE is used when the client wants to delete data
+- A PUT request needs two things: the id in the URL and the updated data in the request body
+- The URL looks like /jobs/1, but in Express the route is written as /jobs/:id
+- :id is a URL parameter, not a fixed value
+- req.params.id gets the id from the URL
+- req.body gets the new data the client sends
+- .find() searches an array and returns the actual object that matches the condition
+- req.params.id comes from the URL as a string, even if it looks like a number
+- job.id in my array is a number, so I had to use Number(req.params.id) before comparing
+- === checks both value and type, so "1" === 1 is false
+- Number("1") turns the string into the actual number 1
+- if (!foundJob) is a clean way to check if .find() did not find anything
+- foundJob.company = req.body.company updates an existing object instead of creating a new one
+- PUT is not for adding a new job. POST creates. PUT updates
 
 ### What I built
-- Continued working inside the learning PostgreSQL database
-- Used DBeaver to run SQL visually
-- Added more job application rows to the job_tracker table
-- Inserted multiple companies and statuses in one INSERT statement
-- Updated Amazon from INTERVIEWING to OFFERED
-- Deleted the Meta row from the table
-- Used SELECT * to check if the changes worked
-- Practiced ORDER BY to sort job applications
-- Practiced LIMIT to return only a certain number of rows
-- Practiced filtering with WHERE
-- Practiced table relationship thinking with primary keys and foreign keys
-- Practiced JOINs to connect related tables
-- Practiced GROUP BY with COUNT / SUM / AVG style summary thinking
-- Kept using my notebook to write the SQL logic before running it
+- Reviewed the 4 REST / CRUD methods before coding
+- Built a PUT /jobs/:id route in node-practice
+- Used jobs.find() to search for the job that matches the id from the URL
+- Used Number(req.params.id) to fix the string vs number problem
+- Added a 404 response if the job does not exist
+- Updated foundJob.company, foundJob.role, and foundJob.status using req.body
+- Sent back a 200 response after the job was updated
+- Tested the PUT route in Postman
+- Sent a PUT request to /jobs/1 with new job data
+- Confirmed with GET /jobs that job id 1 changed from Google to Apple / Backend Engineer / INTERVIEW
 
-### Commands / SQL used
-- INSERT INTO job_tracker (...) VALUES (...), (...), (...); — inserted multiple rows at once
-- UPDATE job_tracker SET status = 'OFFERED' WHERE company = 'Amazon'; — changed an existing row
-- DELETE FROM job_tracker WHERE company = 'Meta'; — removed one row
-- SELECT * FROM job_tracker; — checked the table
-- SELECT * FROM job_tracker ORDER BY date_applied; — sorted rows
-- SELECT * FROM job_tracker LIMIT 3; — limited the result
-- JOIN — connected tables together
-- GROUP BY — grouped rows for summaries
-- COUNT(), SUM(), AVG() — summarized data
+### Commands / tools used
+- npm run dev — started the Express server with nodemon
+- Postman PUT request — tested updating an existing job
+- Postman GET request — confirmed the job actually changed
+- git add . — stage updates
+- git commit -m "add PUT /jobs/:id route with findJob and type conversion" — commit message for the PUT route work
+- git push — push changes to GitHub
 
 ### Mistakes made
-- I wrote UPDATE with WHERE before SET at first
-- I had to learn that SQL has a specific order: UPDATE table, then SET, then WHERE
-- I wrote DELETE job_tracker instead of DELETE FROM job_tracker at first
-- I had to slow down and remember that without WHERE, UPDATE or DELETE can affect too many rows
-- I had to keep checking exact column names instead of guessing
-- I still needed reminders that SQL statements have a pattern and the order matters
+- I first gave status codes when asked for HTTP methods
+- I remembered GET, POST, and DELETE, but forgot PUT at first and guessed UPDATE
+- I had to reason through what the server needs to update a job instead of just trying to remember
+- I wrote PUT logic outside the route at first, which caused req is not defined because req only exists inside the route function
+- I forgot that the URL needed the id and tested /jobs instead of /jobs/1 in Postman
+- The first PUT test returned Job not found because req.params.id was a string and job.id was a number
+- I had to learn that Number(req.params.id) fixes the type mismatch
+- I almost mixed up company, role, and status when assigning values from req.body
+- I tried to send a message back but wrote the JSON object syntax wrong before fixing it
 
 ### Key insight
-- Today made SQL feel more real because I was not just creating a table anymore. I was changing, deleting, sorting, limiting, and connecting data.
-- UPDATE and DELETE showed me why databases require careful thinking. One small missing WHERE can change the wrong data.
-- JOINs showed me that real databases are built from connected tables, not one giant messy table.
-- GROUP BY showed me that SQL can summarize information, not just store it.
-- This is all preparing me for the Job Tracker API because the backend will eventually send requests to PostgreSQL and PostgreSQL will return the data.
+- Today helped me see that API logic is not magic. PUT needs to know which job to update and what new data to put inside it.
+- The id tells the server which record to touch. The body tells the server what to change.
+- The type mismatch bug was important because I will see that again in real APIs. URLs give strings. My data may use numbers. I have to convert before comparing.
+- I did not finish DELETE today because I was tired, but GET, POST, and PUT are now working.
 
 ### Next session
-- Day 17 Tuesday — SQL review, rebuild practice, HackerRank SQL problems, and Phase 1 audit
-- Make sure I can still write the main SQL commands without just copying them
-- Check that Phase 1 proof items are complete before moving into Node.js / Express
+- Day 22 Wednesday — build DELETE /jobs/:id
+- Finish full CRUD
+- Then move into error handling middleware and real Job Tracker API planning
 
-## May 26 2026 — Day 17 SQL Review + Phase 1 Audit
-
-### What i learned
-- I learned that review is not passive watching. Review means rebuilding from memory and checking what I actually remember
-- SQL syntax still needs repetition, but the concepts are starting to connect
-- SELECT reads data
-- INSERT adds data
-- UPDATE changes data
-- DELETE removes data
-- WHERE filters rows
-- ORDER BY sorts rows
-- LIMIT controls how many rows come back
-- GROUP BY groups data so I can summarize it
-- JOIN connects tables together using related columns
-- HackerRank SQL problems are useful because they force me to read the question and write the query myself
-- The proof items matter because they show actual progress instead of just saying I studied
-- Phase 1 was not about being a master. It was about building the foundation and proof that I can keep going
-
-### What I built / reviewed
-- Reviewed the SQL commands from the previous session
-- Rebuilt the SQL logic from memory instead of just looking at old queries
-- Practiced SELECT, WHERE, ORDER BY, LIMIT, UPDATE, DELETE, JOIN, and GROUP BY
-- Completed 5 HackerRank SQL practice problems
-- Audited Phase 1 proof items
-- Confirmed the portfolio is live on Vercel
-- Confirmed the Python CSV reader/writer script is complete
-- Confirmed the PostgreSQL / SQL proof item is complete
-- Confirmed the GitHub repos are showing real work
-- Confirmed I am ready to start Phase 2 early with Node.js and Express
-
-### Commands / SQL reviewed
-- SELECT * FROM table_name;
-- SELECT column_name FROM table_name WHERE condition;
-- INSERT INTO table_name (...) VALUES (...);
-- UPDATE table_name SET column = value WHERE condition;
-- DELETE FROM table_name WHERE condition;
-- ORDER BY column_name;
-- LIMIT number;
-- JOIN related tables
-- GROUP BY column_name
-- COUNT(), SUM(), AVG()
-
-### Mistakes made
-- I still needed repetition with exact SQL order
-- I had to slow down and not treat WHERE as a standalone command
-- I had to remember that column names must match exactly
-- I had to remind myself that HackerRank questions are about understanding the question first, not rushing into typing SQL
-- I had to stop measuring myself against mastery and measure myself against where I started on Day 1
-
-### Key insight
-- Phase 1 is basically complete now.
-- I am not a master yet, but I have real proof items: a live portfolio, JavaScript mini projects, a Python CSV script, and real PostgreSQL/SQL practice.
-- The biggest improvement is not just the code. It is that I am learning to think before I code, write the logic in plain English, make mistakes, read errors, and fix them.
-- I am ready to move into Phase 2 because Node.js and Express will build directly on the JavaScript and SQL foundation I already started.
-
-### Next session
-- Day 18 Wednesday — start Node.js and Express
-- Build the first basic server
-- Understand runtime vs framework
-- Learn request and response using the waiter / restaurant analogy
-
-## May 27 2026 — Day 18 Node.js + Express Started
+## June 3 2026 — Day 22 DELETE Route + Full CRUD + Career Updates
 
 ### What i learned
-- I learned that Node.js is not a framework. Node.js is a runtime environment
-- A runtime environment means it lets JavaScript run outside the browser
-- I realized I had already been using Node.js when I ran files like node day1.js or node country-comparison.js in the terminal
-- Express is the framework built on top of Node.js that makes it easier to build servers
-- React is a library for the frontend, not technically a framework
-- npm means Node Package Manager
-- npm init means initialize the folder as a Node project for the first time
-- package.json is like the project's ID card because it tracks project information and dependencies
-- npm install express downloads Express into the project
-- node_modules is where installed packages live, but I should not push node_modules to GitHub
-- .gitignore tells Git what files or folders to ignore
-- A server is like a waiter: it receives a request and sends back a response
-- The client is like the customer
-- The server is like the waiter
-- The database is like the kitchen
-- A route is an instruction that tells the server what to do when someone visits a specific path
-- GET means the client is asking the server to give something back
-- '/' is the home route / main entrance of the server
-- req means request, which is what the client sends
-- res means response, which is what the server sends back
-- res.send() sends text or data back to the client
-- app.listen() tells the server what port to listen on
-- localhost:3000 is my own computer serving the app locally on port 3000
+- I watched the Feynman video and used it to think about how I should learn software engineering
+- The 7 Feynman-style principles I pulled out were: become a self learner, learn by understanding not memorizing, do not blindly follow experts, speak my mind honestly, think from first principles, ask stupid questions, and keep learning fun
+- I realized I am doing some of those, but I still need to improve on understanding, first-principles thinking, and making learning active
+- I learned that looking at notes is okay right now if I actually understand what I am reading
+- A function is a reusable machine that does a specific job
+- In Express, the function inside app.get(), app.post(), app.put(), or app.delete() is a callback function
+- The callback function does not run immediately. Express calls it later when the matching request comes in
+- req is what the client sends to the server
+- res is what the server uses to send something back to the client
+- app.listen() also takes a callback function that runs once the server starts
+- DELETE only needs the id in the URL. It does not need a request body
+- .find() returns the item itself
+- .findIndex() returns the position / index of the item
+- .findIndex() returns -1 when it cannot find anything
+- -1 is JavaScript's way of saying “not found” for indexes
+- I learned why I cannot use !jobIndex to check for not found because index 0 is a real position but 0 is falsy
+- jobs.splice(jobIndex, 1) means start at that position and remove 1 item
+- The 1 in splice means remove one item only, not two or more
+- Early return means if something is wrong, return a response and stop the function right there
+- If an if block already has return, I usually do not need an else after it
+- console.log() is a built-in function / method that needs parentheses
+- return is a JavaScript keyword, not a function, so I do not need parentheses with return
+- The same name can exist in different scopes, like a bmi function outside and a bmi variable inside the function
 
 ### What I built
-- Created a new folder called node-practice
-- Initialized a Node project using npm init -y
-- Installed Express using npm install express
-- Created package.json and package-lock.json
-- Created .gitignore and ignored node_modules
-- Created index.js
-- Imported Express with require('express')
-- Created an Express app with express()
-- Built my first route with app.get('/')
-- Sent back "Hello World" using res.send()
-- Started the server on port 3000 using app.listen()
-- Ran the server with node index.js
-- Opened localhost:3000 in the browser and saw Hello World
-- Created a GitHub repo for node-practice
-- Committed and pushed the first Express server to GitHub
+- Built the DELETE /jobs/:id route
+- Used jobs.findIndex() to find the position of the job by id
+- Used Number(req.params.id) again because the id from the URL is a string
+- Added a 404 response when the job is not found
+- Used jobs.splice(jobIndex, 1) to remove the job from the array
+- Sent back a 200 response with a deleted message
+- Tested DELETE /jobs/2 in Postman
+- Confirmed with GET /jobs that Meta was removed from the jobs array
+- Completed the full fake-array CRUD API in node-practice
+- Full CRUD now works: GET /jobs, POST /jobs, PUT /jobs/:id, DELETE /jobs/:id
+- Committed and pushed the DELETE route work to GitHub
+- Updated my LinkedIn headline to target backend + healthcare IT / HL7
+- Updated my LinkedIn About section with portfolio and GitHub
+- Added more LinkedIn skills and reached 50 skills
+- Updated my resume to target both backend SWE roles and healthcare IT / HL7 integration roles
+- Started light Week 5 application calibration and kept private details outside progress.md
+- Completed one Codewars JavaScript kata: BMI calculator
+- Started HackerRank SQL practice and completed the first part of the set before getting tired
 
-### Commands used
-- npm init -y — created package.json with default settings
-- npm install express — installed Express
-- echo "node_modules" > .gitignore — stopped Git from tracking node_modules
-- node index.js — ran the Express server
-- Ctrl + C — stopped the server
-- git init — started the repo
-- git add . — staged all files
-- git commit -m "first express server - hello world on port 3000" — saved the first server
-- git push — pushed node-practice to GitHub
-
-### Mistakes made
-- I thought Node.js was a framework at first, but learned it is a runtime
-- I thought React was a framework, but learned it is a frontend library
-- I thought runtime meant how long the code runs, but learned it means the environment where code runs
-- At first I thought the input was console.log("Hello World"), but then learned the input is the client request
-- I started thinking about fetch / async / await, but that is for making requests, and today I was building the server that receives requests
-- I tried const app = require('express') first, but then learned the better convention is const express = require('express') and const app = express()
-- I forgot express needs quotes inside require('express')
-- I used a backslash instead of a forward slash for the route path at first
-- I tried to put a string directly in app.get() instead of giving it a function
-- I wrote res("Hello World") instead of res.send("Hello World")
-- I accidentally put a quote after res in function(req, res)
-- I misspelled app.listen as app.listien
-- I used port 300 instead of 3000 at first
-- I got a git pathspec error while committing, but I fixed it and still pushed the repo
-
-### Key insight
-- Today felt like a major shift because I built my first real server.
-- Before today, JavaScript was mostly scripts and mini projects. Now I used JavaScript to make something that listens for a browser request and sends a response back.
-- The waiter analogy helped everything click: browser asks, server responds, database will later provide the stored data.
-- This is the beginning of the backend part of the roadmap.
-- The Job Tracker API does not feel as abstract anymore because I can see the first piece: a server listening on a port and responding to requests.
-
-### Next session
-- Day 19 Thursday — continue Node.js and Express
-- Add more routes
-- Practice JSON responses
-- Understand request and response more deeply
-- Start thinking about how routes like /jobs will eventually connect to PostgreSQL
-
-## May 28 2026 — Day 19 Node/Express JSON Routes + Postman
-
-### What i learned
-- I learned that JSON means JavaScript Object Notation
-- JSON looks like JavaScript objects and arrays, and it is the main format APIs use to send data
-- res.json() sends JSON back to the client instead of plain text
-- res.json() should usually send an object or an array, not just a random string
-- A JSON API response can look like {"message": "Hello World"} or an array of job objects
-- A route like GET /jobs can return fake job data first before connecting to PostgreSQL later
-- A hardcoded jobs array is temporary, but it helps me understand what the API will eventually return from the database
-- nodemon watches my files and restarts the server automatically when I save changes
-- --save-dev means the package is only needed while developing, not for production users
-- npx runs a package installed locally in the project
-- npm run dev can be used as a shortcut when I add a dev script in package.json
-- HTTP status codes tell the client what happened with the request
-- 200 means OK / request worked
-- 201 means Created / something new was created
-- 400 means Bad Request / the client sent bad data
-- 404 means Not Found / the route or resource does not exist
-- 500 means Internal Server Error / something broke on the server
-- Postman is used to test APIs because the browser mostly sends GET requests
-- Postman lets me send GET, POST, PUT, DELETE and see the status code, response time, response size, and JSON body
-
-### What I built
-- Updated the home route from plain text to a JSON response
-- Changed the / route to return a message object using res.json()
-- Added a fake jobs array with 3 job objects
-- Added a GET /jobs route that returns all jobs as JSON
-- Installed nodemon as a development dependency
-- Used npx nodemon index.js to run the local nodemon package
-- Added an npm run dev script in package.json
-- Started the server using npm run dev
-- Updated the /jobs route to explicitly return status code 200
-- Installed and opened Postman
-- Sent a GET request to localhost:3000/jobs in Postman
-- Confirmed the /jobs endpoint returned 200 OK and the jobs array as JSON
-- Committed and pushed the Node/Express updates to GitHub
-
-### Commands used
-- npm install --save-dev nodemon — installed nodemon for development
-- npx nodemon index.js — ran nodemon from the local project
-- npm run dev — started the server using the dev script
-- git add . — staged the Node updates
-- git commit -m "add /jobs route, nodemon, npm run dev script" — saved the JSON route and nodemon work
-- git commit -m "add status codes, test with Postman" — saved the status code and Postman testing work
-- git push — pushed the updates to GitHub
+### Commands / tools used
+- npm run dev — ran the Express server
+- Postman DELETE request — tested deleting a job
+- Postman GET request — verified the job was removed
+- git add . — staged the DELETE route changes
+- git commit -m "add DELETE /jobs/:id route - complete CRUD" — saved the CRUD completion work
+- git push — pushed the code to GitHub
+- LinkedIn — updated headline, About, and skills
+- Resume document — updated summary, skills, and project positioning
+- Codewars — completed BMI kata
+- HackerRank SQL — practiced SQL questions
 
 ### Mistakes made
-- I first guessed res.send().json, but learned the method is just res.json()
-- I put the colon inside the message key like "message:" instead of writing "message": outside the quotes
-- I forgot the status field in the first version of the fake jobs array
-- I wrote Project Manage instead of Project Manager in one job role
-- nodemon did not run globally, so I had to use npx nodemon index.js
-- In Postman I accidentally sent the URL with a hidden newline at the end, so I got Cannot GET /jobs%0A
-- I had to clear the URL and type localhost:3000/jobs cleanly
-- I still owed Codewars and HackerRank from the day before, but I did not complete them that night
+- I first wrote the DELETE route path without the forward slash: jobs/:id instead of /jobs/:id
+- I thought about using .find() again, but DELETE needed .findIndex() because splice needs the position
+- I struggled with why Number(req.params.id) is needed, but then I understood that URL values are strings
+- I thought findIndex should return a 404 by itself, but array methods do not know about HTTP responses
+- I had to learn that findIndex returns -1 when nothing is found
+- I was confused about why we use jobIndex === -1 instead of !jobIndex
+- I had to understand that index 0 is a real item, so !0 would be a bug
+- I tried to use splice like it takes a callback function, but splice only needs numbers
+- I wrote jobs.splice(jobIndex) at first, but I needed jobs.splice(jobIndex, 1)
+- I forgot to send a response after deleting the job at first
+- In the BMI kata, I returned the BMI number too early, which stopped the if statements from running
+- I had to remember: store first, then check. Do not return before the logic runs
+- In SQL, I used a long alias and learned Oracle can complain when an identifier is too long
+- I almost used GROUP BY when I only needed one total for the whole table
 
 ### Key insight
-- Today made the server feel more like a real API.
-- Yesterday the server only said Hello World, but today it returned real JSON data from a /jobs endpoint.
-- The Job Tracker API is starting to make more sense because I can see the shape of it: routes return data, Postman tests the routes, and later PostgreSQL will replace the fake jobs array.
-- Postman is important because I cannot fully test real API behavior from the browser alone.
+- Today was a big milestone because I finished full CRUD in Express.
+- This is the first time my API can create, read, update, and delete data, even though the data is still just a fake array.
+- I also saw that my healthcare IT / HL7 background is a real lane for job applications, not just something random from the past.
+- My backend lane and healthcare integration lane can work together instead of fighting each other.
+- The biggest learning today was not just DELETE. It was learning how to explain code instead of just reading words.
+- When I explain in my own words, I understand more than I think I do.
 
 ### Next session
-- Continue Node.js / Express
-- Learn POST routes
-- Use req.body to receive data from a client
-- Add a new job into the jobs array
-- Keep the daily Codewars and HackerRank habit from slipping
-
-## June 1 2026 — Day 20 POST /jobs + Foundation Review
-
-### What i learned
-- I learned that taking a few days off makes review important before adding new topics
-- I did not study from Friday May 29 to Sunday May 31 because I was busy with house chores, cleaning, and removing old furniture
-- Even after the break, I still remembered the basic server flow better than I thought
-- GET means the client is requesting / reading data from the server
-- POST means the client is sending data to the server so something can be created
-- Data sent with POST does not live in the URL. It lives in the request body
-- req is the request object, and req.body is where the data from the client lives
-- Express does not automatically understand incoming JSON data unless I tell it to
-- app.use(express.json()) is middleware that runs before the route and turns incoming raw JSON text into a JavaScript object
-- Middleware is like a manager / security guard that checks the request before it reaches the route
-- express.json() does not turn JavaScript into JSON. It takes incoming raw text that looks like JSON and turns it into a JavaScript object I can use
-- app.post() is used to create a POST route
-- jobs.length + 1 can be used to create the next id when working with a fake jobs array
-- jobs.push(newJob) adds the new job object into the jobs array
-- res.status(201).json(newJob) sends back the newly created job with the Created status
-- Postman can send JSON in the Body tab using raw + JSON
-- The best way to review Phase 1 is not to reread everything, but to keep using those concepts inside Phase 2
-
-### What I built
-- Started with a memory review because I had not reviewed for a few days
-- Rebuilt a basic Express server from memory in a practice file called index2.js
-- Reviewed the four basic Express server blocks: import Express, create app, define routes, start listening
-- Added app.use(express.json()) to index.js
-- Built a POST /jobs route
-- Created a newJob object using req.body.company, req.body.role, and req.body.status
-- Used jobs.length + 1 to create the new id
-- Used jobs.push(newJob) to add the new job into the jobs array
-- Sent back the new job with status 201
-- Tested POST /jobs in Postman using JSON body data
-- Added Microsoft / Junior Developer / APPLIED as a new job
-- Verified with GET /jobs that the jobs array now had 4 jobs
-- Did a bottom-up review of Node.js, Express, routes, and middleware
-- Created review.js as another memory practice server on port 4000
-- Ran review.js and confirmed it worked in the browser
-- Planned to delete index2.js and review.js because they were practice files only
-
-### Commands used
-- node index2.js — ran the memory practice server
-- npm run dev — started the main Express server with nodemon
-- node review.js — ran the review server
-- Ctrl + C — stopped running servers
-- git add . — stage updates when committing
-- git commit -m "add POST /jobs route with req.body and 201 status" — planned commit for the POST route work
-- git push — push Node practice updates to GitHub
-
-### Mistakes made
-- I came back rusty because I did not study or review Friday through Sunday
-- In the memory rewrite, I used res.JSON instead of res.json, but JavaScript is case sensitive
-- I first used res.json("Hello World") as a plain string instead of returning an object like {"message": "Hello World"}
-- I had to be reminded that app.listen() needs a callback function wrapping the console.log
-- I named the memory file index2.js, so npm run dev did not run it because the dev script points to index.js
-- I first thought app.use() just tells the server to use express json, but I learned it is middleware that runs before the route
-- I tried to use req.body like a function, but req.body is an object, not something I call
-- I almost wrote app.push(newJob), but app is the Express server. The array is jobs, so the correct idea is jobs.push(newJob)
-- I wrote newJobs at first, but the variable was actually newJob
-- I almost returned the whole jobs array after POST, but the better response is the newly created job
-- In review.js I forgot a comma between req and res
-- I also missed a comma between the route path '/' and the function in app.get()
-
-### Key insight
-- Today was not about rushing forward. It was about getting sharp again after a few days off.
-- I proved that I can rebuild a basic Express server from memory, even if I still need corrections.
-- The logic is slowly connecting: routes are instructions, req is what comes in, res is what goes out, middleware prepares the request, and the jobs array is temporary storage until PostgreSQL is connected.
-- Phase 1 concepts are not gone. Arrays, objects, .push(), functions, and JSON are showing up directly inside Phase 2.
-- I do not need to review all of Phase 1 from scratch. I need to keep doing targeted review and use those concepts inside real backend work.
-
-### Next session
-- Day 21 Tuesday — continue Express CRUD
-- Build PUT /jobs/:id to update a job
-- Build DELETE /jobs/:id to remove a job
+- Day 23 Thursday — Feynman review from memory
+- Finish remaining HackerRank SQL problems
+- Start error handling middleware if there is time
 - Start planning the real Job Tracker API structure
-- Keep using morning rewrite / active recall before new topics
+- Keep job application details in a private tracker, not in public progress.md
+
+## June 4 2026 — Day 23 Feynman Review + HackerRank SQL + Roadmap Sync
+
+### What i learned
+- I started with a Feynman review before touching code or notes
+- I reviewed CRUD from memory: Create, Read, Update, Delete
+- I reviewed the 4 HTTP methods: GET reads, POST creates, PUT updates, DELETE removes
+- I caught myself almost mixing up POST and PUT, but corrected it
+- I reviewed DELETE route logic in plain English before code
+- DELETE logic is: get the id from the URL, find the index, check if not found, remove with splice, send a response
+- I learned more SQL pattern recognition through HackerRank
+- COUNT(city) - COUNT(DISTINCT city) gives the difference between total city entries and unique city names
+- GROUP BY is for totals per category, but if I need one total for the whole table, I do not need GROUP BY
+- LENGTH(city) counts how many characters are in a city name
+- LIKE 'a%' checks if something starts with a
+- LIKE '%a' checks if something ends with a
+- % is a wildcard that means anything can come before or after
+- OR means any condition can be true
+- AND means both groups of conditions must be true
+- Parentheses matter in SQL because they group OR conditions before connecting them with AND
+- I learned that commas do not belong in the WHERE clause. WHERE uses AND / OR
+- DISTINCT removes duplicates from the result
+- I learned that job application details should stay in a private tracker, not in public progress.md
+- The Claude project folder is private, so resume.md and job_applications.md can live there for context, but not in a public GitHub repo
+- I also learned that my roadmap needed to be updated to match what actually happened this week
+
+### What I built / updated
+- Finished the HackerRank SQL set for the day
+- Practiced SQL problems using COUNT, DISTINCT, LENGTH, LIKE, OR, AND, and parentheses
+- Prepared to migrate to a new chat because the old chat was close to the image limit
+- Created / planned a private job_applications.md tracker for the Claude project folder
+- Confirmed the two application entries should stay private and not inside public progress.md
+- Reviewed what roadmap updates were needed after this week’s progress
+- Updated the roadmap direction to reflect that Phase 2 Week 5 is in progress and CRUD is already complete in node-practice
+- Updated the roadmap context that LinkedIn headline, About, skills, and resume updates already happened in Week 5
+- Confirmed Per Scholas is not realistic right now because of my 11pm–9am work schedule
+- Added HL7 Integration Engineer and Healthcare IT Developer as real target lanes alongside backend roles
+- Documented that HackerRank SQL is now part of the daily formula
+- Prepared the handoff prompt for starting a new chat with roadmap.md and progress.md attached
+
+### Commands / tools used
+- HackerRank SQL — completed the SQL practice set
+- LinkedIn / resume context — reviewed current job-search positioning
+- Claude project folder planning — decided what files should be attached privately
+- progress.md — updated here to bring the log current through June 4
+
+### Mistakes made
+- I almost mixed up POST and PUT during the Feynman review, but corrected it
+- I initially tried to think about SQL conditions too narrowly, like only checking a city that starts with a and ends with a
+- I forgot that a city can start with one vowel and end with a different vowel
+- I needed to use two groups of OR conditions and connect them with AND
+- I almost used commas in the WHERE clause, but SQL uses AND / OR for conditions
+- I had to be reminded to use DISTINCT when the problem asks for unique city names
+- I almost put private job application information in progress.md, but that should stay private
+
+### Key insight
+- Today showed me that the review habit is working. I can forget small details, but I can reason back into them when I slow down.
+- Full CRUD is already done in node-practice, so now the next real step is not more fake-array practice forever. The next step is error handling and then the real Job Tracker API structure.
+- I also realized my progress files have to stay accurate because I am using them to migrate between chats and keep the roadmap alive.
+- The progress.md should track learning and public progress. Job applications and resume details should live in private files.
+
+### Next session
+- Day 24 Friday — error handling middleware
+- Add a catch-all 404 route for unknown endpoints
+- Start setting up the real Job Tracker API project folder
+- Connect PostgreSQL to Express for the first time
+- Run the first real database query from the API
+- Keep doing Codewars + HackerRank SQL as daily active recall
+
