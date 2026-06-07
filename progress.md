@@ -2,14 +2,14 @@
 
 ## Current Status
 - Week: 5
-- Day: 25 complete
-- Last session: June 6 2026
+- Day: 26 complete
+- Last session: June 7 2026
 - Current phase: Phase 2 — Node.js + Express Job Tracker API with PostgreSQL
-- Phase 2 progress: Real job-tracker-api project created. Express server connected to PostgreSQL. GET /jobs route returning real database data. First commit pushed to GitHub.
-- Current technical status: job-tracker-api repo is live on GitHub. jobs table created in job_tracker PostgreSQL database. GET /jobs working and tested in Postman. Next step is POST /jobs to save new jobs to the database.
+- Phase 2 progress: GET /jobs and POST /jobs complete and connected to real PostgreSQL database. Both routes tested in Postman. Two commits pushed to GitHub.
+- Current technical status: job-tracker-api repo is live on GitHub. GET /jobs reads all jobs from database. POST /jobs creates new jobs and returns created job with 201 status. Next step is input validation for POST /jobs — ensure required fields are present before inserting.
 - Main roadmap: Claude Backend SWE + DevOps roadmap stays the main hands-on path
-- Support track: IBM Full Stack Software Developer Certificate on Coursera — not yet enrolled as of June 6. Must enroll before Day 26.
-- Next session: Day 26 — POST /jobs route, save new job to PostgreSQL, return created job as JSON
+- Support track: IBM Full Stack Software Developer Certificate on Coursera — enrolled June 6 2026
+- Next session: Day 27 — input validation for POST /jobs, PUT /jobs/:id route
 
 ## Learning System Status
 - Main lane: Backend SWE + DevOps roadmap with Claude
@@ -34,17 +34,18 @@
   - Added catch-all 404 handler for unknown routes
   - Added global error handling middleware for clean JSON error responses
   - Tested error handling in Postman and committed to GitHub
-- [x] Job Tracker API — real project started June 6
+- [x] Job Tracker API — real project started June 6, POST /jobs complete June 7
   - job-tracker-api folder created
   - npm initialized, packages installed: express, pg, dotenv, nodemon
   - Express server running on port 3000
   - db/pool.js created with PostgreSQL connection using pg and dotenv
   - job_tracker database created in PostgreSQL
   - jobs table created with all columns
-  - GET /jobs route connected to real PostgreSQL database
-  - Tested in Postman — returns real data as JSON
-  - First commit pushed to GitHub: github.com/nixon-abuku/job-tracker-api
-  - Still to do: POST /jobs, PUT /jobs/:id, DELETE /jobs/:id, JWT auth, Zod validation, Jest tests, deployment
+  - GET /jobs route connected to real PostgreSQL database ✅
+  - POST /jobs route saving new jobs to PostgreSQL and returning 201 ✅
+  - Both routes tested in Postman — real data confirmed in DBeaver ✅
+  - Two commits pushed to GitHub: github.com/nixon-abuku/job-tracker-api
+  - Still to do: input validation, PUT /jobs/:id, DELETE /jobs/:id, JWT auth, Zod validation, Jest tests, deployment
 - [ ] Full-stack Job Tracker
 - [ ] Docker + CI/CD
 - [ ] AWS deployment
@@ -71,7 +72,8 @@
 - [x] Decided to add IBM Full Stack Software Developer Certificate as a support track — June 5
 - [x] Confirmed the IBM course should reinforce foundations, certificate progress, LinkedIn/resume credibility, and concepts Claude may skip
 - [x] Set the rule that IBM cannot replace the hands-on Backend SWE + DevOps roadmap
-- [ ] Enroll in IBM Full Stack Certificate on Coursera — must happen before Day 26
+- [x] Enrolled in IBM Full Stack Certificate on Coursera — June 6 2026
+- [x] Identified Course 1: Introduction to Software Engineering as starting point
 - [ ] Start IBM course work with active recall instead of passive video watching
 - [ ] Turn IBM lessons into small code reps, notes, quizzes, or roadmap reinforcement
 
@@ -984,3 +986,78 @@
 - Start tracking session hours and week total inside progress.md
 - Monday June 9 repo audit: review the older healthcare repos and learn how to explain them honestly before pinning them again
 - Enroll in IBM Full Stack Certificate on Coursera before Day 26
+
+## June 7 2026 — Day 26 POST /jobs Route + PostgreSQL Insert
+
+### What I learned
+- I learned that POST /jobs is for creating new job data and saving it into the database
+- I learned that POST is for creating new data
+- I learned that PUT is for updating data that already exists
+- I learned that req.body is how Express reads JSON data sent from Postman
+- I learned that req represents the full request from the client
+- I learned that req.body holds the JSON body sent by the client
+- I learned that req.body.company pulls out the company value from the request body
+- I learned that app.post('/jobs') creates a route that handles POST requests to /jobs
+- I learned that the function inside the route contains the instructions that run when the client sends a POST request
+- I learned that pool.query() is how Express sends SQL commands to PostgreSQL
+- I learned that INSERT INTO is used to save new data into a database table
+- I learned that $1, $2, and $3 are placeholders for values
+- I learned that [company, position, status] fills in the placeholders
+- I learned that if the values array is missing, PostgreSQL cannot fill the placeholders and throws an error
+- I learned that placeholders make the query reusable and safer
+- I learned that RETURNING * sends back the full row that was just created including the auto-generated id
+- I learned that res.status(201).json(...) sends back a Created response with JSON
+- I learned that 201 means the resource was successfully created
+- I finally understood the difference between req, req.body, and req.body.company using an Amazon box analogy
+- req is the whole box from the client
+- req.body is the smaller container inside the box holding the JSON data
+- req.body.company is one specific item pulled from that container
+
+### What I built
+- Continued the real job-tracker-api project
+- Built the POST /jobs route
+- Pulled company, position, and status from req.body
+- Used pool.query() to insert a new job into PostgreSQL using this SQL pattern:
+  INSERT INTO jobs (company, position, status) VALUES ($1, $2, $3) RETURNING *
+- Passed [company, position, status] as the values array into the query
+- Returned the created job back to the client as JSON
+- Used res.status(201).json(result.rows) to return a 201 Created response
+- Tested POST /jobs in Postman with company Apple, position Junior Backend Engineer, status APPLIED
+- Confirmed the API returned a full job object with an auto-generated id of 2
+- Confirmed PostgreSQL created the new row successfully
+- Checked DBeaver and confirmed the new job was saved into the jobs table
+- Confirmed the database had two rows after the POST test
+- Committed and pushed to GitHub
+
+### Mistakes made
+- I first left the POST route body empty
+- I wrote INSERT INTO(company, position, status) and forgot the table name jobs
+- I wrote RETURN instead of RETURNING
+- I forgot that RETURNING * has to stay inside the SQL string
+- I forgot to include the values array at first
+- I misspelled company as compamy
+- I wrote res.status.json(...) instead of res.status(201).json(...)
+- I had to review why routes should go above app.listen()
+
+### Key insight
+- GET /jobs reads job data from PostgreSQL
+- POST /jobs creates new job data in PostgreSQL
+- req.body is the data sent by the client — the Amazon box analogy made this click
+- pool.query() is the connection between Express and PostgreSQL
+- $1, $2, and $3 are placeholders that get filled by the values array
+- RETURNING * gives back the full row that was created
+- The Job Tracker API now has the first two CRUD operations working with a real database: read and create
+- Frustration is not the same as failure. I wanted to give up today but pushed through and built something real.
+
+### Session hours
+- Session hours: 2.25
+- Week total: 22.25
+
+### Next session
+- Day 27 — add validation for POST /jobs
+- Make sure company, position, and status are required before inserting into PostgreSQL
+- Return a clean JSON error if required fields are missing
+- Practice explaining POST /jobs without notes
+- Review req.body, placeholders, RETURNING *, and res.status(201).json()
+- Continue IBM Introduction to Software Engineering after the main build work
+- Keep tracking session hours and week total
