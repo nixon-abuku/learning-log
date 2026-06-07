@@ -2,19 +2,24 @@
 
 ## Current Status
 - Week: 5
-- Day: 23 complete
-- Last session: June 4 2026
-- Current phase: Phase 2 — Node.js + Express API foundations
-- Phase 2 progress: CRUD complete in node-practice (GET, POST, PUT, DELETE)
-- Next session: June 5 2026 (Day 24 — error handling middleware + real Job Tracker API setup + PostgreSQL connection)
+- Day: 25 complete
+- Last session: June 6 2026
+- Current phase: Phase 2 — Node.js + Express Job Tracker API with PostgreSQL
+- Phase 2 progress: Real job-tracker-api project created. Express server connected to PostgreSQL. GET /jobs route returning real database data. First commit pushed to GitHub.
+- Current technical status: job-tracker-api repo is live on GitHub. jobs table created in job_tracker PostgreSQL database. GET /jobs working and tested in Postman. Next step is POST /jobs to save new jobs to the database.
+- Main roadmap: Claude Backend SWE + DevOps roadmap stays the main hands-on path
+- Support track: IBM Full Stack Software Developer Certificate on Coursera — not yet enrolled as of June 6. Must enroll before Day 26.
+- Next session: Day 26 — POST /jobs route, save new job to PostgreSQL, return created job as JSON
 
-## Sessions Completed
-### Day 1 — May 6 2026
-- Topics: Git fundamentals
-- Built: learning-log repo, 3 commits pushed
-- Commands mastered: init, add, commit, push, status, log, remote add
-- Weak spots: commit message quality
-- Next: JavaScript variables and data types
+## Learning System Status
+- Main lane: Backend SWE + DevOps roadmap with Claude
+- Support lane: IBM Full Stack Software Developer Certificate on Coursera
+- Rule for IBM: no passive watching. Every lesson has to turn into notes, active recall, a mini build, or something that supports the roadmap.
+- Daily formula: active recall first, build with my hands, explain in plain English, then log progress
+- Practice formula: Codewars for JavaScript, HackerRank SQL for SQL reps, and project work for real proof
+- Career lane: backend developer, full-stack developer, healthcare IT developer, HL7 integration engineer, and later DevOps/cloud roles
+- Private rule: progress.md tracks learning and public progress. Job applications, recruiter messages, and resume details stay in private project files.
+- Hour tracking rule: log session hours and week total at the end of every session starting Day 25
 
 ## Projects Status
 - [x] Portfolio website — live on Vercel May 21
@@ -22,11 +27,24 @@
   - README completed May 22
 - [x] Python CSV reader/writer proof item — completed May 18
 - [x] SQL Phase 1 proof item — PostgreSQL + DBeaver + queries completed May 26
-- [x] Node practice repo — Express CRUD foundation complete by June 3
+- [x] Node practice repo — Express CRUD foundation + basic error handling complete by June 4
   - First Express server pushed May 27
   - Added JSON responses, /jobs GET route, nodemon, npm run dev, Postman testing, POST /jobs, PUT /jobs/:id, and DELETE /jobs/:id
   - Full fake-array CRUD complete: GET, POST, PUT, DELETE
-- [ ] Job Tracker API — Phase 2 main project coming next
+  - Added catch-all 404 handler for unknown routes
+  - Added global error handling middleware for clean JSON error responses
+  - Tested error handling in Postman and committed to GitHub
+- [x] Job Tracker API — real project started June 6
+  - job-tracker-api folder created
+  - npm initialized, packages installed: express, pg, dotenv, nodemon
+  - Express server running on port 3000
+  - db/pool.js created with PostgreSQL connection using pg and dotenv
+  - job_tracker database created in PostgreSQL
+  - jobs table created with all columns
+  - GET /jobs route connected to real PostgreSQL database
+  - Tested in Postman — returns real data as JSON
+  - First commit pushed to GitHub: github.com/nixon-abuku/job-tracker-api
+  - Still to do: POST /jobs, PUT /jobs/:id, DELETE /jobs/:id, JWT auth, Zod validation, Jest tests, deployment
 - [ ] Full-stack Job Tracker
 - [ ] Docker + CI/CD
 - [ ] AWS deployment
@@ -39,13 +57,46 @@
 - [x] Resume updated to target backend SWE + healthcare IT / HL7 integration roles — June 3
 - [x] Started Week 5 light application calibration — June 3
 - [x] Job application tracking moved to a private tracker outside progress.md — June 4
-- [ ] Continue 2–5 light applications this week for market research and practice
+- [x] Added career support mode to the Claude project instructions — June 5
+- [x] Responded to Jessica at Mitchell Martin — June 5
+- [x] Applied to MEDFAR and BBH — June 5
+- [x] Tailored resume for BBH — June 5
+- [x] Fixed GitHub bio and updated pinned repos — June 5
+- [x] Connected with François Biron at MEDFAR — June 5
+- [x] Unpinned repos that cannot be explained from memory — June 6
+- [ ] Monday June 9 — repo honesty audit: Healthcare-Integration-Pipeline, hl7-adt-to-dicom-mwl, Hospital-ADT-Engine
+- [ ] Continue targeted applications for market research, recruiter practice, and real interview chances
+
+## IBM Full Stack Certificate Status
+- [x] Decided to add IBM Full Stack Software Developer Certificate as a support track — June 5
+- [x] Confirmed the IBM course should reinforce foundations, certificate progress, LinkedIn/resume credibility, and concepts Claude may skip
+- [x] Set the rule that IBM cannot replace the hands-on Backend SWE + DevOps roadmap
+- [ ] Enroll in IBM Full Stack Certificate on Coursera — must happen before Day 26
+- [ ] Start IBM course work with active recall instead of passive video watching
+- [ ] Turn IBM lessons into small code reps, notes, quizzes, or roadmap reinforcement
+
+## Claude Project Instruction / Modes Status
+- [x] Roadmap Mode — keeps the Backend SWE + DevOps roadmap organized
+- [x] Daily Build Session Mode — tells me exactly what to build next and keeps me moving
+- [x] Debugger Mode — helps me debug without just giving me answers too fast
+- [x] Feynman / Quiz Mode — forces me to explain concepts in plain English
+- [x] IBM Course Companion Mode — helps me use Coursera actively instead of passively
+- [x] Career Mode — resume, recruiter messages, job fit, outreach, and application strategy
+- [x] Accountability Coach Mode — keeps the tone strict, honest, and focused on execution
 
 ## Project Ideas
 - Shift Schedule API (Week 12)
   - Log shifts, calculate hours and pay
   - Node + Express + PostgreSQL
   - Personal use case: I work night shifts
+
+## Sessions Completed
+### Day 1 — May 6 2026
+- Topics: Git fundamentals
+- Built: learning-log repo, 3 commits pushed
+- Commands mastered: init, add, commit, push, status, log, remote add
+- Weak spots: commit message quality
+- Next: JavaScript variables and data types
 
 ## May 7 2026 — Day 2
 
@@ -127,18 +178,18 @@
 ## May 10 2026 — Day 5
 
 ### What I learned
-- How to use if statements 
-- How to use .filter() to filter out what you don't need 
-- How to use .map() to display without anything being left out 
+- How to use if statements
+- How to use .filter() to filter out what you don't need
+- How to use .map() to display without anything being left out
 
 ### What I built
-- Built long-night-shift-log.js 
+- Built long-night-shift-log.js
 - Filters out the days that the shift was below 10 hrs using .map() and function
 - Displays the days of the longshift using .map() and function
-- uses function and for loop to calculate the total hours worked on the days that had long shifts 
+- uses function and for loop to calculate the total hours worked on the days that had long shifts
 
 ### Mistakes made
-- Typo in .filter() , used shift.hr instead of shift.hrs 
+- Typo in .filter() , used shift.hr instead of shift.hrs
 - Paranthesis placement on .filter(function(shift)){ , instead of .filter(function(shift){})
 
 ### Next session
@@ -146,42 +197,42 @@
 
 ## May 11 2026 - Day 6
 
-### What i Learned 
+### What i Learned
 - Using array methods to calculate total using .reduce()
 - Using array method .forEach() to loop through every item in an array
 - Using array method .find() to find something matching condintion in an array
 
-### What I built 
-- Built monthly-paycheck-calculator.js 
+### What I built
+- Built monthly-paycheck-calculator.js
 - Uses array methods .filter() to find weeks with low and high paychecks
 - Uses array methods to find total of weeks with low paycheck and total of weeks with high paycheck
 
-### Mistakes made 
-- Used dot notation directly on an array to get a property 
+### Mistakes made
+- Used dot notation directly on an array to get a property
 
-### Next Session 
-- Ssync/await + fetch + hitting a public API.
+### Next Session
+- Async/await + fetch + hitting a public API.
 
 ## May 12 2026 - Day 7
 
-### What i learned 
--  Using fetch() to grab data from a public API
+### What i learned
+- Using fetch() to grab data from a public API
 - Using async / await to tell the code to wait for the data to arrive before moving on
 - Using .json() to transform raw internet text into a usable JavaScript object.
 - Using Object.values() to extract data from an object when you don't know the exact
 - The power of refactoring: Taking three repetitive functions and condensing them into one clean, reusable function using a parameter (countryName).
 
-### What I built 
+### What I built
 - Built country-comparison.js (and a refactored v1).
 - Used a public API (restcountries.com) to fetch real-world data.
 - Printed out a clean comparison summary of the population, capital city, region, and languages for the USA, United Kingdom, and Germany.
 
-### Mistakes made 
+### Mistakes made
 - Accessed nested data in the wrong order (tried captial.data[0] instead of data[0].capital).
 - Used single quotes (') instead of backticks (`) for template literals, which stopped the variable from working.
 - Hardcoded specific values (like USA or .eng) inside a reusable function, which caused an undefined error when testing other countries like Germany
 
-### Next Session 
+### Next Session
 - Day 8 — Fetch mini project.
 
 ## May 13 2026 — Day 8
@@ -607,7 +658,7 @@
 - .find() returns the item itself
 - .findIndex() returns the position / index of the item
 - .findIndex() returns -1 when it cannot find anything
-- -1 is JavaScript's way of saying “not found” for indexes
+- -1 is JavaScript's way of saying "not found" for indexes
 - I learned why I cannot use !jobIndex to check for not found because index 0 is a real position but 0 is falsy
 - jobs.splice(jobIndex, 1) means start at that position and remove 1 item
 - The 1 in splice means remove one item only, not two or more
@@ -711,7 +762,7 @@
 - Prepared to migrate to a new chat because the old chat was close to the image limit
 - Created / planned a private job_applications.md tracker for the Claude project folder
 - Confirmed the two application entries should stay private and not inside public progress.md
-- Reviewed what roadmap updates were needed after this week’s progress
+- Reviewed what roadmap updates were needed after this week's progress
 - Updated the roadmap direction to reflect that Phase 2 Week 5 is in progress and CRUD is already complete in node-practice
 - Updated the roadmap context that LinkedIn headline, About, skills, and resume updates already happened in Week 5
 - Confirmed Per Scholas is not realistic right now because of my 11pm–9am work schedule
@@ -748,3 +799,188 @@
 - Run the first real database query from the API
 - Keep doing Codewars + HackerRank SQL as daily active recall
 
+## June 4 2026 — Day 24 Roadmap Sync + IBM Full Stack Decision + Error Handling Middleware + Career Updates
+
+### What i learned
+- I learned that adding another course can help me, but only if I do not let it become a distraction
+- The Claude Backend SWE + DevOps roadmap is still the main path because it makes me build real projects with my hands
+- The IBM Full Stack Software Developer Certificate can support the roadmap by reinforcing foundations and giving me certificate progress
+- IBM should help with LinkedIn, resume credibility, and concepts Claude may skip, but it cannot replace real project work
+- I learned that passive learning is dangerous for me because watching videos can feel like progress even when I am not building anything
+- The rule has to be: watch less, build more, explain more, quiz more
+- I learned that having different modes inside the Claude project makes sense because not every session is the same
+- Roadmap mode is for planning and sequencing
+- Daily build mode is for writing code and finishing the next task
+- Debugger mode is for fixing errors without skipping the thinking part
+- Feynman / quiz mode is for forcing me to explain things in plain English
+- IBM course companion mode is for turning Coursera into active learning
+- Career mode is useful because resume, recruiter messages, job fit, and outreach are part of getting hired
+- Accountability coach mode is needed because I do not want soft advice. I need honest feedback and execution
+- I learned what middleware is in Express: code that runs between the request coming in and the response going back out
+- Middleware runs in order from top to bottom, so placement matters a lot
+- A catch-all 404 handler is for routes that do not match anything else
+- The catch-all 404 handler should come after the real routes because it is the fallback, not the first thing the app should check
+- A global error handler is centralized middleware that catches errors and sends one clean response format back to the client
+- Express error handling middleware takes 4 parameters: err, req, res, next
+- The 4 parameters matter because Express recognizes that function as an error handler only when it has err first
+- Express sends HTML error pages by default, but that is a problem for an API because API clients like Postman, frontend apps, or mobile apps expect JSON
+- Clean JSON errors are better because the client can read status, message, and error details in a predictable format
+- I also learned that progress.md has to be corrected when the plan changes during the day. If I actually built something, the log should not still say it is next
+
+### What I built / updated
+- Updated the roadmap direction for June 4
+- Added IBM Full Stack Software Developer Certificate as a support track
+- Confirmed IBM is not the main roadmap and should not slow down the Job Tracker API
+- Defined the project instruction modes for Claude
+- Included Resume, recruiter messages, job fit, and outreach as a real mode because job search work is part of the mission
+- Built a catch-all 404 handler for unknown endpoints in the Express node-practice API
+- Built a global error handling middleware function
+- Changed API errors from default HTML-style responses into cleaner JSON responses
+- Tested the catch-all 404 handler in Postman using a route that does not exist
+- Tested the global error handler in Postman
+- Confirmed the middleware order matters by keeping real routes first, then the 404 handler, then the global error handler
+- Committed the error handling middleware work to GitHub
+- Responded to Jessica at Mitchell Martin
+- Applied to MEDFAR
+- Applied to BBH
+- Tailored my resume for BBH
+- Fixed my GitHub bio
+- Updated my pinned GitHub repos
+- Connected with François Biron at MEDFAR
+- Updated progress.md so Day 24 reflects the actual coding and career work completed
+- Kept private job application tracking outside the public progress log where needed
+
+### Commands / tools used
+- npm run dev — ran the Express server with nodemon
+- Postman — tested unknown endpoints and error responses
+- Git / GitHub — committed and pushed the error handling middleware work
+- Claude project instructions — reviewed and updated the mode structure
+- IBM Coursera planning — added as a support lane
+- Resume / recruiter workflow — handled BBH, MEDFAR, Mitchell Martin, and GitHub updates
+- progress.md — updated current status through June 4
+
+### Mistakes made
+- Day 24 work was actually completed on June 4, not June 5. June 5 was a skip day.
+- I had to be honest about this in the next session instead of covering it up
+- I had to remember that middleware order is not random. Express reads from top to bottom
+- I had to understand that the 404 handler should not be placed before real routes or it would catch requests too early
+- I had to learn that an error handler is different from normal middleware because it starts with err and has 4 parameters
+- I had to understand why default Express HTML errors are not good enough for an API
+- I almost treated IBM like it could become the new main path, but the main thing is still building backend projects
+- I need to avoid jumping between too many learning tracks without producing code
+
+### Key insight
+- Full fake-array CRUD is done, and now basic Express error handling is done too.
+- The API is starting to look more like a real backend because it can handle missing routes and errors in a clean way instead of just crashing or sending messy HTML.
+- Middleware is not magic. It is just code that sits in the request/response pipeline, and Express runs it in the order I write it.
+- The next step is the real Job Tracker API setup and PostgreSQL connection.
+- Career work also counts, but it has to support the technical roadmap, not replace the build work.
+
+### Next session
+- Day 25 — real Job Tracker API setup
+- Create the real Job Tracker API project folder
+- Initialize npm and install the needed backend packages
+- Create the Express server structure for the real project
+- Connect PostgreSQL to Express for the first time
+- Run the first real database query from the API
+- Start moving from fake-array CRUD toward real database-backed CRUD
+
+## June 6 2026 — Day 25 Job Tracker API Setup + PostgreSQL Connection
+
+### What I learned
+- I learned that I have to be honest with my progress because June 5 was actually a skip day
+- I learned that if I skip a day, Saturday can become a makeup day instead of a full rest day
+- I learned the difference between node-practice and job-tracker-api
+- node-practice was just a sandbox to learn API foundations with fake array data
+- job-tracker-api is the real project that will use real PostgreSQL data
+- I learned again why const express = require('express') and const app = express() are different
+- express is the tool I import, and app stores the Express application that gets created
+- I learned that app.use(express.json()) is what lets Express read JSON from the request body
+- I learned that app.listen() can still run without a callback, but the callback gives me feedback in the terminal
+- I learned why node_modules goes in .gitignore because it is huge and can be recreated with npm install
+- I learned why .env goes in .gitignore because it can hold passwords and database connection details
+- I learned what pool.js does
+- pool.js reads the database connection details from .env, creates the database connection, and lets other files use it without repeating the same connection code
+- I learned that require('dotenv').config() loads the .env file into process.env
+- I learned that new creates a real usable thing from a class blueprint
+- I learned that Pool has a capital P because it is a class from the pg package
+- I learned that fetch is for external APIs, but pool.query() is for talking directly to PostgreSQL
+- I learned that async warns JavaScript that the function will pause, and await is the actual pause while waiting for the database
+- I learned that result.rows is the actual data returned from PostgreSQL, not the full PostgreSQL response object
+
+### What I built
+- Created the real job-tracker-api project folder
+- Ran npm init and created the package.json file
+- Fixed the package name after accidentally naming it yes
+- Installed express, pg, and dotenv
+- Installed nodemon as a dev dependency
+- Added the dev script with nodemon index.js
+- Created index.js and built the Express server from memory
+- Created .gitignore and added node_modules and .env
+- Created the .env file with PostgreSQL connection details
+- Created a new PostgreSQL database called job_tracker
+- Created the db folder and db/pool.js
+- Connected the app to PostgreSQL using pg, dotenv, and Pool
+- Created the jobs table in DBeaver with columns for company, position, status, location, job URL, notes, interview date, applied date, created date, and updated date
+- Added SERIAL PRIMARY KEY for the job id
+- Added DEFAULT NOW() for created_at and updated_at
+- Built the first real GET /jobs route connected to PostgreSQL
+- Tested GET /jobs in Postman and got an empty array first
+- Inserted a real job row into the database using DBeaver
+- Tested GET /jobs again and saw real database data come back as JSON
+- Initialized Git for the project
+- Made the first commit with a descriptive commit message
+- Pushed the job-tracker-api repo to GitHub
+- Unpinned older repos from GitHub that I cannot explain from memory yet
+- Scheduled Monday June 9 as the repo honesty audit day
+
+### Commands / tools used
+- mkdir job-tracker-api — created the project folder
+- npm init — initialized the project
+- npm install express pg dotenv — installed main packages
+- npm install --save-dev nodemon — installed nodemon as dev dependency
+- npm run dev — started the server with nodemon
+- psql postgres — opened PostgreSQL in the terminal
+- CREATE DATABASE job_tracker; — created the real project database
+- DBeaver — created the jobs table and inserted test data
+- Postman — tested GET /jobs and confirmed real data response
+- git init, git add ., git commit, git push — first commit to GitHub
+
+### Mistakes made
+- I forgot some Express basics at first, like app.use(express.json())
+- I wrote get('express') instead of require('express')
+- I forgot why we store express() inside app
+- I forgot what npm init does at first
+- I typed yes during npm init and accidentally made the package name yes
+- I forgot nodemon, pg, and dotenv at first
+- I wrote commas in the npm install command, but packages should be separated by spaces
+- I missed the comma in package.json between the test script and the dev script
+- I put app.listen() before the route at first, but routes should come before app.listen()
+- I almost changed the port to 5000 without a real reason
+- I forgot how to export from Node.js and had to relearn module.exports = pool
+- I forgot that SERIAL is used for auto-incrementing ids
+- I wrote DEFAULT (NOW) instead of DEFAULT NOW()
+- I first tried to use fetch for the database route, but PostgreSQL uses pool.query()
+- I wrote result.json() at first, but res.json() is what sends data back to the client
+- I almost sent back the full result instead of result.rows
+
+### Key insight
+- Today was a real milestone because the API is not using fake array data anymore.
+- node-practice was just training wheels, but job-tracker-api is the real project.
+- I created a real database, connected Express to PostgreSQL, wrote a real query, and got real data back in Postman.
+- I also learned that I cannot keep projects pinned on GitHub if I cannot explain them from memory.
+- Using AI to help me build something is not the problem. The problem is not understanding what the code does after.
+- I need to keep asking simple questions until the concept clicks instead of pretending I understand.
+- I also need to start tracking session hours because if I do not track them, I cannot know if I am really hitting the weekly goal.
+
+### Session hours
+- Session hours: 4
+- Week total: 20
+
+### Next session
+- Day 26 — continue the real Job Tracker API
+- Add POST /jobs so I can create jobs from Postman and save them into PostgreSQL
+- Practice async / await, pool.query(), and SQL inserts
+- Start tracking session hours and week total inside progress.md
+- Monday June 9 repo audit: review the older healthcare repos and learn how to explain them honestly before pinning them again
+- Enroll in IBM Full Stack Certificate on Coursera before Day 26
