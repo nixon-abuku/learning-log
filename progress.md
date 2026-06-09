@@ -1,15 +1,15 @@
 # Nixon Abuku — Roadmap Progress
 
 ## Current Status
-- Week: 5
-- Day: 26 complete
-- Last session: June 7 2026
+- Week: 6
+- Day: 27 complete
+- Last session: June 8 2026
 - Current phase: Phase 2 — Node.js + Express Job Tracker API with PostgreSQL
-- Phase 2 progress: GET /jobs and POST /jobs complete and connected to real PostgreSQL database. Both routes tested in Postman. Two commits pushed to GitHub.
-- Current technical status: job-tracker-api repo is live on GitHub. GET /jobs reads all jobs from database. POST /jobs creates new jobs and returns created job with 201 status. Next step is input validation for POST /jobs — ensure required fields are present before inserting.
+- Phase 2 progress: GET /jobs, POST /jobs, and input validation complete. All tested in Postman. Three commits pushed to GitHub.
+- Current technical status: job-tracker-api repo is live on GitHub. GET /jobs reads all jobs. POST /jobs creates new jobs with input validation returning 400 for missing fields and 201 for successful creation. Next step is PUT /jobs/:id for updating an existing job.
 - Main roadmap: Claude Backend SWE + DevOps roadmap stays the main hands-on path
 - Support track: IBM Full Stack Software Developer Certificate on Coursera — enrolled June 6 2026
-- Next session: Day 27 — input validation for POST /jobs, PUT /jobs/:id route
+- Next session: Day 28 — PUT /jobs/:id route, update existing job in PostgreSQL
 
 ## Learning System Status
 - Main lane: Backend SWE + DevOps roadmap with Claude
@@ -34,7 +34,7 @@
   - Added catch-all 404 handler for unknown routes
   - Added global error handling middleware for clean JSON error responses
   - Tested error handling in Postman and committed to GitHub
-- [x] Job Tracker API — real project started June 6, POST /jobs complete June 7
+- [x] Job Tracker API — real project started June 6, POST /jobs + validation complete June 8
   - job-tracker-api folder created
   - npm initialized, packages installed: express, pg, dotenv, nodemon
   - Express server running on port 3000
@@ -43,9 +43,10 @@
   - jobs table created with all columns
   - GET /jobs route connected to real PostgreSQL database ✅
   - POST /jobs route saving new jobs to PostgreSQL and returning 201 ✅
-  - Both routes tested in Postman — real data confirmed in DBeaver ✅
-  - Two commits pushed to GitHub: github.com/nixon-abuku/job-tracker-api
-  - Still to do: input validation, PUT /jobs/:id, DELETE /jobs/:id, JWT auth, Zod validation, Jest tests, deployment
+  - Input validation on POST /jobs — returns 400 if required fields missing ✅
+  - All routes tested in Postman — real data confirmed in DBeaver ✅
+  - Three commits pushed to GitHub: github.com/nixon-abuku/job-tracker-api
+  - Still to do: PUT /jobs/:id, DELETE /jobs/:id, JWT auth, Zod validation, Jest tests, deployment
 - [ ] Full-stack Job Tracker
 - [ ] Docker + CI/CD
 - [ ] AWS deployment
@@ -1061,3 +1062,71 @@
 - Review req.body, placeholders, RETURNING *, and res.status(201).json()
 - Continue IBM Introduction to Software Engineering after the main build work
 - Keep tracking session hours and week total
+
+## June 8 2026 — Day 27 Input Validation for POST /jobs + Codewars + HackerRank SQL
+
+### What I learned
+- I learned that input validation checks required fields before the API inserts data into PostgreSQL
+- I learned that company, position, and status should be required for POST /jobs
+- I learned that missing request body values in JavaScript can be checked with !
+- I learned that !company means company is missing, empty, or not provided
+- I learned that || means OR
+- I learned that if (!company || !position || !status) means if any one required field is missing, the validation should run
+- I learned that validation should happen before the database insert
+- I learned that return stops the route early so the insert query does not run after a bad request
+- I learned that 400 means Bad Request
+- I learned that a clean JSON error response is better than letting the database throw a confusing error
+- I reviewed that result is the full PostgreSQL response object
+- I reviewed that result.rows is the actual data returned from PostgreSQL
+- I reviewed that RETURNING * returns the row that was just created, not the whole table
+- I learned that RETURNING * gives back the new row with database-generated fields like id, created_at, and updated_at
+- I reviewed that placeholders like $1, $2, and $3 get filled by the values array
+- I learned that if the values array is missing, PostgreSQL cannot fill the placeholders
+- I learned Math.abs() in JavaScript — it returns the absolute value of a number
+- I learned how to turn the Codewars Twice as old problem into a formula before writing code
+- I practiced using LENGTH(city), ORDER BY, and LIMIT 1 for HackerRank SQL
+- I reviewed that SQL tiebreakers need a second ORDER BY condition like sorting by city name alphabetically
+
+### What I built
+- Continued the real job-tracker-api project
+- Added input validation to the POST /jobs route
+- Checked if company, position, or status is missing before inserting into PostgreSQL
+- Added validation pattern: if (!company || !position || !status) return 400 with clean JSON error
+- Kept the validation before the database insert
+- Confirmed the route still returns 201 when a job is created successfully
+- Tested the validation in Postman by sending a request with a missing required field
+- Confirmed the API returns a clean JSON error instead of saving incomplete data
+- Committed and pushed the updated job-tracker-api work to GitHub
+- Completed the Codewars kata: Twice as old
+- Solved using: Math.abs((2 * sonYearsOld) - dadYearsOld)
+- Completed 5 HackerRank SQL problems covering LENGTH, ORDER BY, LIMIT, LIKE, NOT LIKE, DISTINCT, OR vs AND logic
+- Completed the repo audit for older healthcare GitHub repos
+- Confirmed Healthcare-Integration-Pipeline, hl7-adt-to-dicom-mwl, and Hospital-ADT-Engine stay unpinned until I can explain them from memory
+
+### Mistakes made
+- Did not write progress.md entry on the day — had to write it next morning
+- Could not explain the older healthcare repos from memory during the audit
+- Started writing SQL before explaining the HackerRank problem in plain English
+- Sorted by LENGTH(s.city) twice instead of using s.city ASC as the alphabetical tiebreaker
+- Had to review that || means OR not AND
+- Had to review that missing values in JavaScript are undefined not SQL NULL
+- Had to review that validation should happen before the database insert
+
+### Key insight
+- POST /jobs now has basic input validation
+- Validation protects the database from incomplete required data
+- The correct order inside POST /jobs is: get data, validate, return 400 if missing, run INSERT, return 201
+- The Job Tracker API now has GET /jobs, POST /jobs, and input validation all working
+- Writing progress.md on the same day is non-negotiable — doing it the next morning means details get lost
+
+### Session hours
+- Session hours: 3
+- Week total: 25.25
+
+### Next session
+- Day 28 — PUT /jobs/:id route for updating an existing job
+- Practice explaining POST /jobs validation without notes
+- Review req.body, !company, ||, return, 400, and res.status(400).json()
+- Continue Codewars daily JavaScript rep
+- Continue HackerRank SQL daily reps
+- Schedule healthcare repo deep-dive for Saturday or Sunday
