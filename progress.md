@@ -2,14 +2,14 @@
 
 ## Current Status
 - Week: 6
-- Day: 27 complete
-- Last session: June 8 2026
+- Day: 29 complete
+- Last session: June 11 2026
 - Current phase: Phase 2 — Node.js + Express Job Tracker API with PostgreSQL
-- Phase 2 progress: GET /jobs, POST /jobs, and input validation complete. All tested in Postman. Three commits pushed to GitHub.
-- Current technical status: job-tracker-api repo is live on GitHub. GET /jobs reads all jobs. POST /jobs creates new jobs with input validation returning 400 for missing fields and 201 for successful creation. Next step is PUT /jobs/:id for updating an existing job.
+- Phase 2 progress: Full CRUD complete. Routes refactored into routes/jobs.js. All routes tested in Postman after refactor. Committed to GitHub.
+- Current technical status: job-tracker-api has clean separation — index.js sets up the server, routes/jobs.js handles all job routes. Next step is JWT auth.
 - Main roadmap: Claude Backend SWE + DevOps roadmap stays the main hands-on path
 - Support track: IBM Full Stack Software Developer Certificate on Coursera — enrolled June 6 2026
-- Next session: Day 28 — PUT /jobs/:id route, update existing job in PostgreSQL
+- Next session: Day 30 — review refactor from memory, then start JWT auth
 
 ## Learning System Status
 - Main lane: Backend SWE + DevOps roadmap with Claude
@@ -20,6 +20,7 @@
 - Career lane: backend developer, full-stack developer, healthcare IT developer, HL7 integration engineer, and later DevOps/cloud roles
 - Private rule: progress.md tracks learning and public progress. Job applications, recruiter messages, and resume details stay in private project files.
 - Hour tracking rule: log session hours and week total at the end of every session starting Day 25
+- Proof rule: log Codewars problem name and HackerRank problem name in every progress.md entry starting Day 30
 
 ## Projects Status
 - [x] Portfolio website — live on Vercel May 21
@@ -34,7 +35,7 @@
   - Added catch-all 404 handler for unknown routes
   - Added global error handling middleware for clean JSON error responses
   - Tested error handling in Postman and committed to GitHub
-- [x] Job Tracker API — real project started June 6, POST /jobs + validation complete June 8
+- [x] Job Tracker API — routes refactored June 11
   - job-tracker-api folder created
   - npm initialized, packages installed: express, pg, dotenv, nodemon
   - Express server running on port 3000
@@ -44,9 +45,11 @@
   - GET /jobs route connected to real PostgreSQL database ✅
   - POST /jobs route saving new jobs to PostgreSQL and returning 201 ✅
   - Input validation on POST /jobs — returns 400 if required fields missing ✅
-  - All routes tested in Postman — real data confirmed in DBeaver ✅
-  - Three commits pushed to GitHub: github.com/nixon-abuku/job-tracker-api
-  - Still to do: PUT /jobs/:id, DELETE /jobs/:id, JWT auth, Zod validation, Jest tests, deployment
+  - PUT /jobs/:id route updating existing jobs in PostgreSQL and returning 200 ✅
+  - DELETE /jobs/:id route removing jobs from PostgreSQL and returning 200 ✅
+  - Routes refactored into routes/jobs.js — index.js is clean ✅
+  - All routes tested in Postman after refactor — confirmed nothing broke ✅
+  - Still to do: JWT auth, Zod validation, Jest tests, deployment
 - [ ] Full-stack Job Tracker
 - [ ] Docker + CI/CD
 - [ ] AWS deployment
@@ -66,7 +69,7 @@
 - [x] Fixed GitHub bio and updated pinned repos — June 5
 - [x] Connected with François Biron at MEDFAR — June 5
 - [x] Unpinned repos that cannot be explained from memory — June 6
-- [ ] Monday June 9 — repo honesty audit: Healthcare-Integration-Pipeline, hl7-adt-to-dicom-mwl, Hospital-ADT-Engine
+- [x] Repo honesty audit completed June 8 — Healthcare-Integration-Pipeline, hl7-adt-to-dicom-mwl, Hospital-ADT-Engine stay unpinned until explained from memory
 - [ ] Continue targeted applications for market research, recruiter practice, and real interview chances
 
 ## IBM Full Stack Certificate Status
@@ -1130,3 +1133,163 @@
 - Continue Codewars daily JavaScript rep
 - Continue HackerRank SQL daily reps
 - Schedule healthcare repo deep-dive for Saturday or Sunday
+
+## June 9 2026 — Day 28 PUT /jobs/:id + DELETE /jobs/:id + Full CRUD Complete
+
+### What I learned
+- I learned the difference between POST and PUT more clearly
+- POST /jobs is for creating a new job
+- PUT /jobs/:id is for updating a job that already exists
+- I learned that PUT should return 200 OK because it updates existing data, it does not create new data
+- I learned that 201 Created is for POST, not PUT
+- I learned that req.params.id comes from the URL
+- I learned that req.body.company, req.body.position, and req.body.status come from the JSON body
+- I learned that PUT /jobs/3 means the id is inside the URL
+- I learned that Number(req.params.id) converts the id from a string into a number
+- I learned that UPDATE jobs SET ... WHERE id = ... RETURNING * is used to update a row in PostgreSQL
+- I learned that $1, $2, $3, and $4 are placeholders
+- $1 is company, $2 is position, $3 is status, $4 is the job id
+- I learned that the values array [company, position, status, id] fills in those placeholders
+- I learned that result.rows.length === 0 means PostgreSQL did not find a matching row
+- I learned that if the job does not exist, the API should return 404 Not Found
+- I learned that DELETE FROM jobs WHERE id = $1 RETURNING * deletes a job from PostgreSQL
+- I learned that DELETE /jobs/:id also uses req.params.id
+- I learned that after deleting, I should verify the row is actually gone in DBeaver
+
+### What I built
+- Built the PUT /jobs/:id route
+- Used req.params.id to get the job id from the URL
+- Used Number(req.params.id) to convert the id into a number
+- Pulled company, position, and status from req.body
+- Used UPDATE jobs SET company = $1, position = $2, status = $3 WHERE id = $4 RETURNING *
+- Passed [company, position, status, id] into pool.query()
+- Added a 404 check using result.rows.length === 0
+- Returned the updated job with 200 OK
+- Tested PUT /jobs/1 in Postman — confirmed 200 OK and updated job returned as JSON
+- Tested PUT /jobs/999 in Postman — confirmed 404 Not Found with clean JSON message
+- Verified the updated job in DBeaver using SELECT * FROM jobs
+- Committed and pushed the PUT route to GitHub
+- Built the DELETE /jobs/:id route
+- Used DELETE FROM jobs WHERE id = $1 RETURNING *
+- Passed [id] into pool.query()
+- Added a 404 check for jobs that do not exist
+- Returned a success JSON message when a job is deleted
+- Tested DELETE /jobs/2 in Postman — confirmed 200 OK
+- Tested DELETE /jobs/999 in Postman — confirmed 404 Not Found
+- Verified in DBeaver that job id 2 was deleted from the database
+- Committed and pushed the DELETE route to GitHub
+- Completed full CRUD for the Job Tracker API with PostgreSQL
+
+### Mistakes made
+- I confused POST and PUT at the start of the session
+- I first described PUT using POST logic
+- I thought PUT would use INSERT INTO, but PUT uses UPDATE
+- I forgot that PUT should return 200 OK, not 201 Created
+- I first thought the id came from req.body, but the id comes from req.params
+- I wrote app.put('/jobs:id') instead of app.put('/jobs/:id')
+- I wrote await.pool.query instead of await pool.query
+- I tried to update the id in the SQL instead of using the id in the WHERE clause
+- I forgot the values array for the placeholders at first
+- I used a string/template literal inside res.json() instead of returning a real JSON object
+- I tried to check result.rows before declaring result
+- I added an extra parenthesis in the if statement
+
+### Key insight
+- POST creates, GET reads, PUT updates, DELETE removes
+- req.params is for data in the URL
+- req.body is for data sent inside the JSON body
+- result.rows.length === 0 is how I check if PostgreSQL found nothing
+- The Job Tracker API now has full CRUD working with PostgreSQL
+
+### Session hours
+- Session hours: 1.5
+- Week total: 26.75
+
+### Next session
+- Day 29 — refactor routes into routes/jobs.js
+- Review full CRUD flow without notes
+- Continue Codewars and HackerRank SQL
+
+## June 11 2026 — Day 29 Route Refactor + Separation of Concerns
+
+### What I learned
+- I reviewed the full CRUD routes from memory
+- I reviewed that the Job Tracker API has GET /jobs, POST /jobs, PUT /jobs/:id, and DELETE /jobs/:id
+- I learned that GET /jobs returns all jobs
+- I learned that POST /jobs creates a new job, so it does not need an id in the URL
+- I learned that PUT /jobs/:id updates a job that already exists
+- I learned that DELETE /jobs/:id deletes a job that already exists
+- I reviewed that req.params.id gets the id from the URL
+- I reviewed that req.body gets the data sent inside the JSON body
+- I reviewed that when PostgreSQL finds no matching row, result.rows comes back as an empty array
+- I reviewed that result.rows.length === 0 is used to check if the job does not exist
+- I learned why routes should be moved out of index.js
+- I learned that index.js should mainly set up the server
+- I learned that routes/jobs.js should handle all job routes
+- I learned that this is called separation of concerns
+- I learned that express.Router() creates a mini router for a group of routes
+- I learned that when I use app.use('/jobs', jobRoutes), the routes inside routes/jobs.js should not repeat /jobs
+- I learned that inside routes/jobs.js, GET /jobs becomes router.get('/')
+- I learned that inside routes/jobs.js, POST /jobs becomes router.post('/')
+- I learned that inside routes/jobs.js, PUT /jobs/:id becomes router.put('/:id')
+- I learned that inside routes/jobs.js, DELETE /jobs/:id becomes router.delete('/:id')
+- I learned that ./ means current folder
+- I learned that ../ means go one folder up
+- I learned that from inside the routes folder, the pool import should be require('../db/pool.js')
+
+### What I built
+- Started Day 29 with a short review session
+- Reviewed all 4 CRUD routes before building
+- Created a routes folder inside job-tracker-api
+- Created a routes/jobs.js file
+- Moved all job routes out of index.js into routes/jobs.js
+- Changed app.get, app.post, app.put, and app.delete into router.get, router.post, router.put, and router.delete
+- Added const express = require('express') inside routes/jobs.js
+- Added const router = express.Router() inside routes/jobs.js
+- Added const pool = require('../db/pool.js') inside routes/jobs.js
+- Added module.exports = router at the bottom of routes/jobs.js
+- Cleaned up index.js — removed job routes and pool import
+- Imported jobRoutes into index.js using require('./routes/jobs.js')
+- Registered job routes with app.use('/jobs', jobRoutes)
+- Tested all 4 routes in Postman after the refactor
+- Confirmed GET /jobs still returned jobs from PostgreSQL
+- Confirmed POST /jobs still created a new job
+- Confirmed PUT /jobs/5 updated the job status
+- Confirmed DELETE /jobs/5 deleted the job successfully
+- Confirmed the refactor did not break any of the 4 CRUD routes
+- Committed the route refactor to GitHub
+
+### Mistakes made
+- I skipped Wednesday June 10 due to no sleep and a headache
+- I first wanted to only review today, but the session still needed a real build deliverable
+- I forgot that result.rows comes back as an empty array when PostgreSQL finds nothing
+- I first thought routes/jobs.js needed the full Express app, but it needed express.Router()
+- I wrote the wrong pool path at first with ./db/pool.js
+- I had to fix the pool path to ../db/pool.js because routes/jobs.js is inside the routes folder
+- I first used app.use(app, jobRoutes) which was wrong
+- I also tried app.use(jobs, jobRoutes) without quotes
+- I had to learn that the first argument in app.use('/jobs', jobRoutes) is the base URL path as a string
+- I almost kept /jobs inside the route file which would have made the full path /jobs/jobs
+- I had to fix the route paths inside routes/jobs.js to / and /:id
+
+### Key insight
+- The API still works the same after the refactor, but the structure is cleaner now
+- index.js is now responsible for setting up the server
+- routes/jobs.js is now responsible for handling job routes
+- app.use('/jobs', jobRoutes) connects the server to the job routes
+- Since /jobs is already registered in index.js, the routes file only needs / and /:id
+- This refactor did not add a new feature but made the project more professional and easier to maintain
+- The Job Tracker API now has full CRUD working with PostgreSQL and cleaner route structure
+
+### Next session
+- Day 30 — review the refactor from memory
+- Explain how index.js connects to routes/jobs.js without notes
+- Review express.Router(), module.exports, require, app.use, ./, and ../
+- Start JWT auth planning
+- Continue Codewars JavaScript rep — log problem name in progress.md
+- Continue HackerRank SQL reps — log problem name in progress.md
+- Continue IBM Introduction to Software Engineering with active recall format
+
+### Session hours
+- Session hours: 1
+- Week total: 27.75
