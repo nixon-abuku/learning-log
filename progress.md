@@ -1,15 +1,15 @@
 # Nixon Abuku — Roadmap Progress
 
 ## Current Status
-- Week: 6
-- Day: 29 complete
-- Last session: June 11 2026
+- Week: 7
+- Day: 30 complete
+- Last session: June 15 2026
 - Current phase: Phase 2 — Node.js + Express Job Tracker API with PostgreSQL
 - Phase 2 progress: Full CRUD complete. Routes refactored into routes/jobs.js. All routes tested in Postman after refactor. Committed to GitHub.
 - Current technical status: job-tracker-api has clean separation — index.js sets up the server, routes/jobs.js handles all job routes. Next step is JWT auth.
 - Main roadmap: Claude Backend SWE + DevOps roadmap stays the main hands-on path
 - Support track: IBM Full Stack Software Developer Certificate on Coursera — enrolled June 6 2026
-- Next session: Day 30 — review refactor from memory, then start JWT auth
+- Next session: Day 31 — build POST /auth/register and POST /auth/login
 
 ## Learning System Status
 - Main lane: Backend SWE + DevOps roadmap with Claude
@@ -1293,3 +1293,89 @@
 ### Session hours
 - Session hours: 1
 - Week total: 27.75
+
+## June 15 2026 — Day 30 JWT Auth Planning + Package Installation + Users Table
+
+### What I learned
+
+* I reviewed why the routes were moved out of index.js
+* I learned that index.js is responsible for creating the server and connecting the route files
+* I reviewed that routes/jobs.js holds the GET, POST, PUT, and DELETE job routes
+* I reviewed that app.use('/jobs', jobRoutes) connects index.js to routes/jobs.js
+* I learned that JWT stands for JSON Web Token
+* I learned that JWT helps the server identify a user after they log in
+* I learned that after the user logs in successfully, the server creates a token
+* I learned that the client sends the token with future requests instead of sending the username and password every time
+* I learned that the JWT is normally sent inside the Authorization header using Bearer
+* I learned that the current Job Tracker API has no authentication, so anybody can access the job routes
+* I learned that after authentication is added, users will need a valid token to access protected routes
+* I learned that passwords should never be stored as plain text inside the database
+* I learned the difference between password encryption and hashing
+* Encryption can be reversed with a key, but hashing cannot be reversed
+* I learned that bcrypt is used to hash and compare passwords
+* I learned that jsonwebtoken is used to create and verify JWT tokens
+* I learned that JWT_SECRET is a private value used to sign and verify tokens
+* I learned that the users table needs an id, username, and hashed password
+* I learned that the username should be unique so two users cannot register with the same username
+* I learned the difference between the register and login process
+* Register hashes the password and stores the user
+* Login checks the username and password and returns a JWT if they are correct
+
+### What I built
+
+* Pushed the Day 29 progress.md update to GitHub
+* Installed bcrypt
+* Installed jsonwebtoken
+* Confirmed both packages installed with zero vulnerabilities
+* Added JWT_SECRET to the .env file
+* Created a new users table inside the job_tracker PostgreSQL database
+* Added id SERIAL PRIMARY KEY
+* Added username VARCHAR(255) NOT NULL UNIQUE
+* Added hashed_password VARCHAR(3000) NOT NULL
+* Confirmed the users table was created successfully in DBeaver
+* Planned the authentication structure for the Job Tracker API
+* Planned POST /auth/register
+* Planned POST /auth/login
+* Planned JWT middleware for protecting job routes
+
+### Mistakes made
+
+* Did not push Day 29 progress.md before starting the session
+* Did not complete Codewars or HackerRank SQL before the session
+* Forgot some parts of how the route refactor works
+* Said localhost:300/jobs instead of localhost:3000/jobs
+* Did not remember the name of the bcrypt package at first
+* Confused Bearer with a package name
+* Mixed the register and login flows together when explaining authentication
+* Had to review that register saves a new user, while login checks an existing user and creates a token
+
+### Key insight
+
+* JWT authentication will change the API from public routes that anybody can use into protected routes that require a valid user token
+* bcrypt and jsonwebtoken have two different jobs
+* bcrypt protects passwords
+* jsonwebtoken creates and verifies tokens
+* The register route creates the user
+* The login route proves the user is valid and gives them a token
+* The token is what allows the user to access protected routes without entering their password again
+* The authentication foundation is now ready because the packages, secret key, and users table are set up
+
+### Next session
+
+* Continue Day 31
+* Create routes/auth.js
+* Write the comment block for the register route before writing code
+* Build POST /auth/register
+* Validate that username and password are present
+* Hash the password using bcrypt
+* Save the username and hashed password into the users table
+* Return 201 Created after successful registration
+* Test the register route in Postman
+* Start POST /auth/login after the register route works
+* Complete one Codewars JavaScript problem
+* Complete five HackerRank SQL problems
+* Write down the names of the practice problems for proof
+
+### Session hours
+- Session hours: 1.25
+- Week total: 29
