@@ -2,14 +2,14 @@
 
 ## Current Status
 - Week: 7
-- Day: 31 complete
-- Last session: June 16 2026
+- Day: 32 complete
+- Last session: June 17 2026
 - Current phase: Phase 2 — Node.js + Express Job Tracker API with PostgreSQL
 - Phase 2 progress: Full CRUD complete. Routes refactored into routes/jobs.js. All routes tested in Postman after refactor. Committed to GitHub.
 - Current technical status: job-tracker-api has clean separation — index.js sets up the server, routes/jobs.js handles all job routes. Next step is JWT auth.
 - Main roadmap: Claude Backend SWE + DevOps roadmap stays the main hands-on path
 - Support track: IBM Full Stack Software Developer Certificate on Coursera — enrolled June 6 2026
-- Next session: Day 32 — build POST /auth/login, bcrypt.compare(), JWT token creation
+- Next session: Day 33 — JWT middleware to protect job routes
 
 ## Learning System Status
 - Main lane: Backend SWE + DevOps roadmap with Claude
@@ -1485,3 +1485,123 @@
 ### Session hours
 - Session hours: 1.5
 - Week total: 30.5
+
+## June 17 2026 — Day 32 POST /auth/login Route + bcrypt.compare() + JWT Token Generation
+
+### What I learned
+
+* I learned that POST /auth/login checks a user that already exists instead of creating a new user
+* I learned that a successful login should return 200 OK, not 201 Created
+* I learned that login does not create a new database resource
+* I learned that the server creates the JWT token and sends it back to the client
+* I learned that the server does not store the token
+* I learned that the client is responsible for storing the token and sending it with future requests
+* I learned that missing username or password should return 400 Bad Request
+* I learned that an incorrect username or password should return 401 Unauthorized
+* I learned that SELECT * FROM users WHERE username = $1 searches the database for one user
+* I learned that the username is passed into the SQL placeholder using [username]
+* I learned that because the username column is unique, the query should only return one user
+* I learned that result.rows is still an array even when PostgreSQL only returns one user
+* I learned that result.rows[0] gets the first user object from the returned array
+* I learned that result.rows[0].hashed_password gets the stored password hash from the user object
+* I learned that bcrypt.compare() compares the plain password from the login request with the hash stored in PostgreSQL
+* I learned that bcrypt.compare() returns either true or false
+* I learned that the route should return 401 when passwordMatch is false
+* I learned that jsonwebtoken is imported using const jwt = require('jsonwebtoken')
+* I learned that jwt.sign() creates a new JWT token
+* I learned that the JWT payload can contain the user id
+* I learned that process.env.JWT_SECRET is used to sign the token
+* I learned that { expiresIn: '1h' } makes the token expire after one hour
+* I learned that the token should be returned inside a JSON object
+* I learned that adding return before a response stops the function after the response is sent
+* I learned that usernames can be changed to lowercase before saving or searching so username matching is case insensitive
+* I learned that passwords should stay case sensitive and should not be changed to lowercase or uppercase
+
+### What I built
+
+* Built the POST /auth/login route
+* Pulled username and password from req.body
+* Added validation for missing username or password
+* Returned 400 Bad Request when login fields were missing
+* Queried the users table using the username
+* Used a PostgreSQL placeholder for the username
+* Returned 401 Unauthorized when the username was not found
+* Used bcrypt.compare() to compare the entered password with the stored password hash
+* Returned 401 Unauthorized when the password did not match
+* Imported jsonwebtoken into routes/auth.js
+* Created a JWT token containing the user id
+* Signed the token using process.env.JWT_SECRET
+* Set the token to expire after one hour
+* Returned the token with 200 OK
+* Tested login in Postman using the correct username and password
+* Confirmed the API returned a JWT token
+* Tested login with an incorrect password
+* Confirmed the API returned 401 Unauthorized
+* Added return to the successful responses inside routes/jobs.js
+* Cleaned up the GET, POST, PUT, and DELETE response statements
+
+### Mistakes made
+
+* First said a successful login only returns a confirmation message and forgot the main response is the JWT token
+* First thought the jobs table might be returned after login
+* First used 400 for incorrect credentials instead of 401 Unauthorized
+* Had to review why login returns 200 instead of 201
+* First wrote bycrypt.compare() instead of bcrypt.compare()
+* Wrote the SQL query without the values array
+* First wrote the values array directly beside the SQL string instead of passing it as the second pool.query() argument
+* Made syntax mistakes when writing the if statement for a username that was not found
+* First tried to use hashed_password without getting it from the database result
+* First thought the stored password could come from req.body
+* Had to review why the stored hash comes from result.rows[0].hashed_password
+* First made the password comparison logic backwards
+* Returned 401 when passwordMatch was true instead of when it was false
+* Misspelled return as retrun
+* First wrote jwt.sign(payload, secret, options) without replacing the example words with real values
+* First returned the token as a raw string instead of returning { token: token }
+* In Codewars, first wrote str.upperCase() instead of str.toUpperCase()
+
+### Key insight
+
+* The login route follows this order:
+  1. Get username and password from req.body
+  2. Return 400 if either field is missing
+  3. Search PostgreSQL for the username
+  4. Return 401 if the username does not exist
+  5. Compare the entered password with the stored bcrypt hash
+  6. Return 401 if the password is incorrect
+  7. Generate a JWT token if the credentials are correct
+  8. Return the token with 200 OK
+* Register creates a new user but login checks an existing user
+* bcrypt handles passwords while jsonwebtoken handles tokens
+* The token contains the user id so the server can identify which user is making future requests
+* The Job Tracker API now has working user registration and login
+* The next step is protecting the job routes so they cannot be accessed without a valid token
+
+### Next session
+
+* Continue Day 33
+* Create JWT authentication middleware
+* Read the token from the Authorization header
+* Check that the header starts with Bearer
+* Separate the token from the word Bearer
+* Verify the token using jwt.verify()
+* Return 401 Unauthorized when no token is provided
+* Return 401 Unauthorized when the token is invalid or expired
+* Add the decoded user id to the request
+* Protect the job routes with the authentication middleware
+* Test GET /jobs without a token
+* Test GET /jobs with a valid token
+* Complete one Codewars problem
+* Complete two HackerRank SQL problems
+
+### Codewars
+- Problem: MakeUpperCase
+- Solution: Used str.toUpperCase() to return the string in uppercase
+
+### HackerRank SQL
+- Problem 1: Not completed during this session
+- Problem 2: Not completed during this session
+
+### Session hours
+- Session hours: 1.1
+- Week total: 31.6
