@@ -2,14 +2,14 @@
 
 ## Current Status
 - Week: 7
-- Day: 30 complete
-- Last session: June 15 2026
+- Day: 31 complete
+- Last session: June 16 2026
 - Current phase: Phase 2 — Node.js + Express Job Tracker API with PostgreSQL
 - Phase 2 progress: Full CRUD complete. Routes refactored into routes/jobs.js. All routes tested in Postman after refactor. Committed to GitHub.
 - Current technical status: job-tracker-api has clean separation — index.js sets up the server, routes/jobs.js handles all job routes. Next step is JWT auth.
 - Main roadmap: Claude Backend SWE + DevOps roadmap stays the main hands-on path
 - Support track: IBM Full Stack Software Developer Certificate on Coursera — enrolled June 6 2026
-- Next session: Day 31 — build POST /auth/register and POST /auth/login
+- Next session: Day 32 — build POST /auth/login, bcrypt.compare(), JWT token creation
 
 ## Learning System Status
 - Main lane: Backend SWE + DevOps roadmap with Claude
@@ -1379,3 +1379,109 @@
 ### Session hours
 - Session hours: 1.25
 - Week total: 29
+
+## June 16 2026 — Day 31 POST /auth/register Route + bcrypt Password Hashing
+
+### What I learned
+
+* I learned that the register route and login route have different jobs
+* The register route creates a new user and stores the user in the database
+* The login route will check an existing user and create a JWT token
+* I learned that POST /auth/register receives the username and password from req.body
+* I learned that the register route should validate that the username and password are present before doing anything else
+* I learned that missing required fields should return a 400 Bad Request
+* I learned that bcrypt.hash(password, 10) hashes the password before it is stored
+* I learned that the number 10 is the salt rounds used by bcrypt
+* I learned that the original password should never be inserted into the database
+* I learned that the value saved into hashed_password should be hashedPassword
+* I learned that PostgreSQL placeholders use $1 and $2, not ${username} or ${password}
+* I learned that [username, hashedPassword] fills the two placeholders in the SQL query
+* I learned that module.exports = router lets another file import and use the auth router
+* I learned that app.use('/auth', authRoutes) connects the auth routes to the main Express server
+* I learned that app.use('/auth', authRoutes) and router.post('/register') combine to create POST /auth/register
+* I learned that imports inside index.js use ./routes/auth.js because the routes folder is inside the current project folder
+* I learned that a successful account creation should return 201 Created
+
+### What I built
+
+* Updated progress.md through Day 30
+* Pushed the updated progress.md to GitHub
+* Created routes/auth.js
+* Imported Express inside routes/auth.js
+* Created a new router using express.Router()
+* Imported bcrypt
+* Imported the PostgreSQL pool
+* Built the POST /auth/register route
+* Pulled username and password from req.body
+* Added validation for missing username or password
+* Added a 400 JSON response when required fields are missing
+* Hashed the password using bcrypt.hash(password, 10)
+* Added the SQL query to insert the username and hashed password into the users table
+* Used $1 and $2 placeholders inside the SQL query
+* Passed [username, hashedPassword] into pool.query()
+* Added RETURNING * to the insert query
+* Returned 201 Created with an account creation message
+* Exported the auth router using module.exports = router
+* Imported authRoutes inside index.js
+* Connected the auth router using app.use('/auth', authRoutes)
+* Tested POST /auth/register in Postman with a username and password
+* Confirmed the API returned 201 Created
+* Confirmed the new user was saved inside PostgreSQL
+* Checked DBeaver and confirmed the password was stored as a bcrypt hash instead of plain text
+* Tested the register route with a missing password
+* Confirmed the API returned 400 Bad Request
+* Committed and pushed the register route to GitHub
+
+### Mistakes made
+
+* Did not write or push the Day 30 progress entry after the previous session
+* Did not complete Codewars or HackerRank SQL practice before starting Day 31
+* Mixed the register process with the login and token process inside the first comment block
+* Left the inputs, outputs, and steps empty at first
+* Wrote express.router() instead of express.Router()
+* Forgot to import bcrypt at first
+* Misspelled bcrypt as bycrypt
+* First stored bcrypt inside a variable called hash instead of bcrypt
+* Misspelled username as unsername
+* Wrote an empty return inside the validation at first
+* Forgot to add module.exports = router
+* First tried to insert into a column called password, but the real database column is hashed_password
+* Used ${username} and ${password} instead of PostgreSQL placeholders
+* First passed the original password into the values array instead of hashedPassword
+* First imported the auth route using ../routes/auth.js instead of ./routes/auth.js
+
+### Key insight
+
+* The register route follows a clear order:
+  1. Get the username and password from req.body
+  2. Validate that both fields are present
+  3. Hash the password with bcrypt
+  4. Insert the username and hashed password into PostgreSQL
+  5. Return 201 Created
+* The original password should never enter the database
+* The database only stores the bcrypt hash
+* routes/auth.js handles authentication routes while index.js connects them to the server
+* The Job Tracker API can now register new users safely
+* The authentication system now has a working register route but login and token creation still need to be built
+
+### Next session
+
+* Continue Day 32
+* Build POST /auth/login
+* Pull the username and password from req.body
+* Validate that both login fields are present
+* Search the users table for the username
+* Return 401 Unauthorized if the username does not exist
+* Use bcrypt.compare() to compare the entered password with the stored hash
+* Return 401 Unauthorized if the password does not match
+* Use jsonwebtoken to create a JWT token when the login is correct
+* Sign the token using JWT_SECRET
+* Return the token to the client
+* Test successful and unsuccessful login requests in Postman
+* Complete one Codewars JavaScript problem
+* Complete five HackerRank SQL problems
+* Read YDKJS after the main build work and connect the concepts to the Job Tracker API
+
+### Session hours
+- Session hours: 1.5
+- Week total: 30.5
